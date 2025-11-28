@@ -1,0 +1,35 @@
+.navbar {
+  height: 60px;
+  background: #ffdd00; /* Amarillo patito */
+  color: #000; /* Texto negro */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #c8b300;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #000; /* Icono negro */
+  cursor: pointer;
+}
+
+.title {
+  font-size: 21px;
+  font-weight: bold;
+  color: #000;
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #000;
+}
+
+.user-area .material-icons {
+  color: #000 !important;
+}

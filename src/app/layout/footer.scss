@@ -1,0 +1,22 @@
+.footer-fixed {
+  height: 50px;
+  background: #000;
+  color: #ffdd00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #222;
+}
+
+/* ESTE ES EL TRUCO */
+.footer-inner {
+  width: calc(100% - 260px); /* ancho del contenido SIN sidebar */
+  margin-left: 260px; /* empuja el footer al mismo offset del contenido */
+  text-align: center;
+}
+.footer-inner {
+  width: calc(100% - 260px);
+  margin-left: 260px;
+  max-width: 1400px;
+  margin-right: auto;
+}

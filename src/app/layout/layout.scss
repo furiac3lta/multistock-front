@@ -1,46 +1,87 @@
-/* ---- SIDEBAR ---- */
-.sidebar {
-  width: 240px;
-  background: #1f1f1f !important; /* negro elegante */
-  color: white;
-  padding: 20px;
+/* ============================================
+   LAYOUT GENERAL
+============================================ */
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden; /* evita scroll global */
+}
+
+/* Navbar fijo */
+.navbar-fixed {
+  height: 60px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+/* Footer fijo */
+.footer-fixed {
+  height: 50px;
+  flex-shrink: 0;
+  z-index: 10;
+  background: #000;
+  color: #ffdd00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Zona del medio (sidebar + contenido) */
+.main-area {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Wrapper del sidenav */
+.sidenav-wrapper {
+  flex: 1;
+  min-height: 0; /* habilita scroll interno */
+}
+
+/* ============================================
+   SIDEBAR (Angular Material)
+============================================ */
+mat-sidenav {
+  width: 260px !important;
+  background: #111 !important;
+  color: #fff;
+  border-radius: 0 !important;
+  padding: 20px 0;
 }
 
 .logo {
-  color: #ffd72d;  /* amarillo patito */
-  margin-bottom: 20px;
+  color: #ffdd00;
+  font-size: 22px;
   font-weight: bold;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
-/* ---- LINKS ---- */
-.sidebar a.mat-list-item {
-  color: white !important;
+mat-nav-list a {
+  color: #ccc !important;
   font-size: 16px;
 }
 
-.sidebar a.mat-list-item mat-icon {
-  color: #ffd72d !important;
-  margin-right: 10px;
+mat-nav-list a:hover {
+  background: #222 !important;
+  color: #ffdd00 !important;
 }
 
-.sidebar a.mat-list-item:hover {
-  background: #333 !important;
-  border-radius: 8px;
+mat-icon {
+  color: #ffdd00;
+  margin-right: 12px;
 }
 
-.sidebar a.mat-list-item.active {
-  background: #444 !important;
-  border-radius: 8px;
-}
-
-/* ---- CONTENIDO ---- */
-.content {
-  background: #f5f5f7;
-}
-
-.content-body {
-  padding: 20px;
+/* ============================================
+   CONTENIDO (solo aquí hay scroll)
+============================================ */
+.content-scroll {
+  overflow-y: auto;
+  background: #f5f5f5;
+  padding: 30px 40px;
 }
 span{
-    color: wheat;
+    color: wheat!important;
 }

@@ -1,45 +1,50 @@
-<mat-sidenav-container class="layout-container">
+<div class="layout">
 
-  <!-- SIDEBAR -->
-  <mat-sidenav mode="side" opened class="sidebar">
-    <h2 class="logo">StockApp</h2>
+  <!-- NAVBAR FIJO -->
+  <app-navbar class="navbar-fixed" (toggleSidebar)="toggleSidebar()"></app-navbar>
 
-    <mat-nav-list>
+  <div class="main-area">
 
-      <a mat-list-item routerLink="/">
-        <mat-icon>dashboard</mat-icon>
-        <span>Dashboard</span>
-      </a>
+    <!-- SIDEBAR FIJO -->
+    <mat-sidenav-container class="sidenav-wrapper" autosize>
 
-      <a mat-list-item routerLink="/products">
-        <mat-icon>inventory</mat-icon>
-        <span>Productos</span>
-      </a>
+      <mat-sidenav #sidenav mode="side" opened class="sidebar">
+        <h2 class="logo">StockApp</h2>
 
-      <a mat-list-item routerLink="/categories">
-        <mat-icon>category</mat-icon>
-        <span>Categorías</span>
-      </a>
+        <mat-nav-list>
 
-      <!-- NUEVO: Movimientos -->
-      <a mat-list-item routerLink="/movements/history">
-        <mat-icon>history</mat-icon>
-        <span>Movimientos</span>
-      </a>
+          <a mat-list-item routerLink="/">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </a>
 
-    </mat-nav-list>
-  </mat-sidenav>
+          <a mat-list-item routerLink="/products">
+            <mat-icon>inventory</mat-icon>
+            <span>Productos</span>
+          </a>
 
-  <!-- CONTENT -->
-  <mat-sidenav-content class="content">
-    <mat-toolbar color="primary">
-      <span>Sistema de Stock</span>
-    </mat-toolbar>
+          <a mat-list-item routerLink="/categories">
+            <mat-icon>category</mat-icon>
+            <span>Categorías</span>
+          </a>
 
-    <div class="content-body">
-      <router-outlet></router-outlet>
-    </div>
+          <a mat-list-item routerLink="/movements/history">
+            <mat-icon>history</mat-icon>
+            <span>Movimientos</span>
+          </a>
 
-  </mat-sidenav-content>
+        </mat-nav-list>
+      </mat-sidenav>
 
-</mat-sidenav-container>
+      <!-- SOLO ESTO SCROLLEA -->
+      <mat-sidenav-content class="content-scroll">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+
+    </mat-sidenav-container>
+  </div>
+
+  <!-- FOOTER FIJO -->
+  <app-footer class="footer-fixed"></app-footer>
+
+</div>

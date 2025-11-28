@@ -1,0 +1,24 @@
+/* SIDEBAR - Angular Material */
+.sidebar a.mat-list-item {
+  color: #e6e6e6 !important;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+}
+
+.sidebar a.mat-list-item:hover {
+  background: rgba(255, 221, 0, 0.15) !important;
+  color: #ffdd00 !important;
+}
+
+.sidebar a.mat-list-item.active {
+  background: rgba(255, 221, 0, 0.25) !important;
+  color: #ffdd00 !important;
+}
+
+.sidebar a.mat-list-item mat-icon {
+  color: #ffdd00 !important;
+  font-size: 22px;
+}
