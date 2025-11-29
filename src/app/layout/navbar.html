@@ -3,14 +3,19 @@
     <span class="material-icons">menu</span>
   </button>
 
-  <span class="title">Sistema de Stock</span>
+  <span class="title">Multi Stock</span>
+
+  <div class="branch-box">
+    <select [(ngModel)]="currentBranch" (change)="changeBranch()">
+      <option *ngFor="let b of branches" [value]="b.id">{{ b.name }}</option>
+    </select>
+  </div>
 
   <div class="user-area">
-  <span class="user-name">{{ usuario.nombre }}</span>
+    <span class="user-name">{{ usuario.nombre }}</span>
 
-  <button class="logout-btn" (click)="logout()">
-    <span class="material-icons">logout</span>
-  </button>
-</div>
-
+    <button class="logout-btn" (click)="logout()">
+      <span class="material-icons">logout</span>
+    </button>
+  </div>
 </nav>

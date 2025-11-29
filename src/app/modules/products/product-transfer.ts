@@ -1,0 +1,71 @@
+import { Component, Inject, inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
+import { Product } from '../../core/models/product.model';
+import { StockTransferService } from '../../core/services/stock-transfer.service';
+import { BranchSessionService } from '../../core/services/branch-session.service';
+
+@Component({
+  selector: 'app-product-transfer',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
+  ],
+  templateUrl: './product-transfer.html'
+})
+export class ProductTransfer {
+
+  // 🔥 Ahora SÍ quedó inyectado correctamente y público
+  public branchSession = inject(BranchSessionService);
+
+  public branches = [
+    { id: 1, name: 'Sucursal Centro' },
+    { id: 2, name: 'Sucursal Norte' },
+    { id: 3, name: 'Sucursal Sur' }
+  ];
+
+  form = new FormGroup({
+    targetBranchId: new FormControl<number>(0, Validators.required),
+    quantity: new FormControl<number>(1, [
+      Validators.required,
+      Validators.min(1)
+    ]),
+    description: new FormControl<string>(''),
+  });
+
+  username = 'admin'; // temporal
+
+  constructor(
+    public dialogRef: MatDialogRef<ProductTransfer>,
+    @Inject(MAT_DIALOG_DATA) public data: Product,
+    private transferService: StockTransferService
+  ) {}
+
+  save() {
+    if (this.form.invalid) return;
+
+    const req = {
+      sourceBranchId: this.branchSession.getBranch(),
+      targetBranchId: this.form.value.targetBranchId!,
+      productId: this.data.id!,
+      quantity: this.form.value.quantity!,
+      description: this.form.value.description ?? '',
+      user: this.username
+    };
+
+    this.transferService.transfer(req)
+      .subscribe(() => this.dialogRef.close(true));
+  }
+}

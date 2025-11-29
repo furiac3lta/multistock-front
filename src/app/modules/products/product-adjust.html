@@ -2,56 +2,36 @@
 
 <div mat-dialog-content>
 
-  <!-- FORMULARIO COMPLETO -->
   <form [formGroup]="form" class="form-wrapper">
 
     <p><strong>Producto:</strong> {{ data.name }}</p>
     <p><strong>Stock actual:</strong> {{ data.stock }}</p>
 
-    <!-- Tipo de ajuste -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Tipo de ajuste</mat-label>
       <mat-select formControlName="type">
-        <mat-option value="IN">Entrada</mat-option>
-        <mat-option value="OUT">Salida</mat-option>
-        <mat-option value="SET">Ajustar a valor exacto</mat-option>
+        <mat-option value="INCREASE">Entrada</mat-option>
+        <mat-option value="DECREASE">Salida</mat-option>
+        <mat-option value="SET">Ajuste directo (valor exacto)</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('type')?.hasError('required')">
-        Seleccioná un tipo de ajuste
-      </mat-error>
     </mat-form-field>
 
-    <!-- Entrada / Salida -->
     <div *ngIf="form.value.type !== 'SET'">
       <mat-form-field appearance="outline" class="full">
         <mat-label>Cantidad</mat-label>
         <input type="number" matInput formControlName="quantity" min="1">
-        <mat-error *ngIf="form.get('quantity')?.hasError('min')">
-          La cantidad debe ser mayor a 0
-        </mat-error>
-        <mat-error *ngIf="form.get('quantity')?.hasError('required')">
-          Ingresá una cantidad
-        </mat-error>
       </mat-form-field>
     </div>
 
-    <!-- Ajuste directo -->
     <div *ngIf="form.value.type === 'SET'">
       <mat-form-field appearance="outline" class="full">
         <mat-label>Nuevo valor</mat-label>
         <input type="number" matInput formControlName="newValue" min="0">
-        <mat-error *ngIf="form.get('newValue')?.hasError('min')">
-          El nuevo stock no puede ser negativo
-        </mat-error>
-        <mat-error *ngIf="form.get('newValue')?.hasError('required')">
-          Ingresá un valor válido
-        </mat-error>
       </mat-form-field>
     </div>
 
-    <!-- Descripción -->
     <mat-form-field appearance="outline" class="full">
-      <mat-label>Descripción (opcional)</mat-label>
+      <mat-label>Descripción</mat-label>
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
 
@@ -61,12 +41,5 @@
 
 <div mat-dialog-actions align="end">
   <button mat-button (click)="dialogRef.close()">Cancelar</button>
-
-  <!-- BOTÓN DESHABILITADO SI EL FORM ESTÁ MAL -->
-  <button mat-raised-button 
-          color="primary" 
-          (click)="save()" 
-          [disabled]="form.invalid">
-    Guardar
-  </button>
+  <button mat-raised-button color="primary" (click)="save()">Guardar</button>
 </div>

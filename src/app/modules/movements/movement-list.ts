@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MovementService } from '../../core/services/movement.service';
 import { ProductService } from '../../core/services/product.service';
+import { BranchSessionService } from '../../core/services/branch-session.service';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 
@@ -12,10 +13,19 @@ import { CommonModule } from '@angular/common';
 })
 export class MovementList implements OnInit {
 
-  movementService = inject(MovementService);
-  productService = inject(ProductService);
+  private movementService = inject(MovementService);
+  private productService = inject(ProductService);
+  private branchSession = inject(BranchSessionService);
 
-  displayedColumns = ['createdAt', 'product', 'movementType', 'quantity', 'createdBy', 'description'];
+  displayedColumns = [
+    'createdAt',
+    'product',
+    'movementType',
+    'quantity',
+    'createdBy',
+    'description'
+  ];
+
   data: any[] = [];
 
   ngOnInit(): void {
@@ -23,17 +33,22 @@ export class MovementList implements OnInit {
   }
 
   loadData() {
+    const currentBranch = this.branchSession.getBranch();
+
     this.movementService.getAll().subscribe((movements: any[]) => {
 
-      // Orden por fecha descendente
-      movements.sort((a: any, b: any) =>
+      // Filtrar movimientos por sucursal
+      const filteredByBranch = movements.filter(m => m.branchId === currentBranch);
+
+      // Ordenar por fecha
+      filteredByBranch.sort((a: any, b: any) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
 
       // Cargar productos
       this.productService.getAll().subscribe((products: any[]) => {
 
-        this.data = movements.map((m: any) => ({
+        this.data = filteredByBranch.map((m: any) => ({
           ...m,
           productName: products.find(p => p.id === m.productId)?.name ?? '—'
         }));

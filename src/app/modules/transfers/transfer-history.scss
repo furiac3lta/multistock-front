@@ -1,0 +1,52 @@
+h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.mat-header-cell {
+  font-weight: 600;
+  background: #f2f2f2;
+}
+
+.mat-row:hover {
+  background: #fafafa;
+}
+
+td, th {
+  padding: 12px;
+}
+
+.in {
+  color: #1b8a08;
+  font-weight: bold;
+}
+
+.out {
+  color: #c62828;
+  font-weight: bold;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.full {
+  width: 100%;
+}
+
+.branch-tag {
+  background: #222;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}

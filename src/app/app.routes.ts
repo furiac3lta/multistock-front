@@ -53,6 +53,13 @@ export const routes: Routes = [
     import('./modules/movements/movement-history')
       .then(m => m.MovementHistory),
 },
+{
+  path: 'transfers/history',
+  loadComponent: () =>
+    import('./modules/transfers/transfer-history')
+      .then(m => m.TransferHistoryComponent)
+}
+
 
 
 

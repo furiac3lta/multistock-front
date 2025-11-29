@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Transferir Stock</h2>
+
+<div mat-dialog-content>
+
+  <p><strong>Producto:</strong> {{ data.name }}</p>
+  <p><strong>Stock disponible:</strong> {{ data.stock }}</p>
+
+  <form [formGroup]="form" class="form-wrapper">
+
+    <!-- Sucursal destino -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Sucursal destino</mat-label>
+      <mat-select formControlName="targetBranchId">
+        <mat-option
+          *ngFor="let b of branches"
+          [value]="b.id"
+          [disabled]="b.id === branchSession.getBranch()">
+          {{ b.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Cantidad -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Cantidad</mat-label>
+      <input matInput type="number" min="1" formControlName="quantity">
+    </mat-form-field>
+
+    <!-- Descripción -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+  </form>
+
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="save()">Transferir</button>
+</div>

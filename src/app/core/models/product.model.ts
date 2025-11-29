@@ -7,4 +7,6 @@ export interface Product {
   salePrice: number;
   categoryId: number;
   active: boolean;
+    branchId: number; // 🔥 AGREGAR ESTE CAMPO
+
 }

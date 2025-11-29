@@ -11,8 +11,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { StockMovementService } from '../../core/services/stock-movement.service';
 import { ProductService } from '../../core/services/product.service';
+import { BranchSessionService } from '../../core/services/branch-session.service';
 
-import { StockMovement } from '../../core/models/stock-movement.model';
 import { Product } from '../../core/models/product.model';
 
 @Component({
@@ -21,8 +21,6 @@ import { Product } from '../../core/models/product.model';
   imports: [
     CommonModule,
     FormsModule,
-
-    // Angular Material
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
@@ -37,6 +35,7 @@ export class MovementHistory implements OnInit {
 
   private movementService = inject(StockMovementService);
   private productService = inject(ProductService);
+  private branchSession = inject(BranchSessionService);
 
   displayedColumns = ['date', 'product', 'type', 'quantity', 'description', 'user'];
 
@@ -54,22 +53,33 @@ export class MovementHistory implements OnInit {
   }
 
   loadData() {
-    this.movementService.getAll().subscribe(movs => {
-      this.productService.getAll().subscribe(products => {
+  const branchId = this.branchSession.getBranch();
 
-        this.products = products;
+  this.movementService.getAll().subscribe(movs => {
+    this.productService.getAll().subscribe(products => {
 
-        this.movements = movs.map(m => ({
-          ...m,
-          productName: products.find(p => p.id === m.productId)?.name ?? '—'
-        }));
+      this.products = products;
 
-        this.filtered = [...this.movements];
+      // 🔥 Filtrar movimientos por sucursal del PRODUCTO
+      const movementsByBranch = movs.filter(m => {
+        const prod = products.find(p => p.id === m.productId);
+        return prod && prod.branchId === branchId;
       });
+
+      this.movements = movementsByBranch.map(m => ({
+        ...m,
+        productName: products.find(p => p.id === m.productId)?.name ?? '—'
+      }));
+
+      this.filtered = [...this.movements];
     });
-  }
+  });
+}
+
+ 
 
   applyFilters() {
+
     this.filtered = this.movements.filter(m => {
 
       // PRODUCTO
@@ -80,19 +90,20 @@ export class MovementHistory implements OnInit {
       if (this.filterType && m.movementType !== this.filterType)
         return false;
 
-      // RANGO FECHAS
+      // FECHAS
       const date = new Date(m.createdAt);
 
       if (this.filterDateFrom && date < this.filterDateFrom)
         return false;
 
       if (this.filterDateTo) {
-        let end = new Date(this.filterDateTo);
+        const end = new Date(this.filterDateTo);
         end.setHours(23, 59, 59);
         if (date > end) return false;
       }
 
       return true;
     });
+
   }
 }

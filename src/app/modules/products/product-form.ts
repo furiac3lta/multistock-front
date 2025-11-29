@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { ProductService } from '../../core/services/product.service';
 import { CategoryService } from '../../core/services/category.service';
 import { Product } from '../../core/models/product.model';
+import { BranchSessionService } from '../../core/services/branch-session.service';
+
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -22,6 +24,7 @@ export class ProductForm {
 
   private productService = inject(ProductService);
   private categoryService = inject(CategoryService);
+  private branchSession = inject(BranchSessionService);
   private dialogRef = inject(MatDialogRef<ProductForm>);
 
   categories: any[] = [];
@@ -68,6 +71,7 @@ export class ProductForm {
     this.categoryService.getAll().subscribe(resp => this.categories = resp);
 
     if (this.data) {
+      // Si es edición, cargamos todo
       this.form.patchValue(this.data);
     }
   }
@@ -80,6 +84,9 @@ export class ProductForm {
     if (this.form.invalid) return;
 
     const value = this.form.value as Product;
+
+    // 🔥 MULTISUCURSAL: siempre enviamos sucursal actual
+    value.branchId = this.branchSession.getBranch();
 
     const request = this.data
       ? this.productService.update(this.data.id!, value)
