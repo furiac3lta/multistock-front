@@ -1,24 +1,15 @@
-.history-container {
-  padding: 20px;
-}
-
 .filters {
   display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
+  gap: 16px;
   margin-bottom: 20px;
 }
 
-.full-width {
-  width: 100%;
-}
-
 .in {
-  color: #0a8f08;
+  color: green;
   font-weight: bold;
 }
 
 .out {
-  color: #d00000;
+  color: red;
   font-weight: bold;
 }

@@ -1,24 +1,40 @@
-/* SIDEBAR - Angular Material */
-.sidebar a.mat-list-item {
-  color: #e6e6e6 !important;
-  font-size: 16px;
+.sidebar {
+  width: 250px;
+  background: #111;
+  color: #fff;
+  height: 100vh;         /* <= LO QUE FALTABA */
+  overflow-y: auto;      /* <= LO QUE FALTABA */
+  padding: 10px;
+}
+
+.sidebar.closed {
+  width: 70px;
+}
+
+.branch-selector {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.branch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.branch-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: 10px;
+  padding: 8px;
+  background: #222;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  color: #ddd;
 }
 
-.sidebar a.mat-list-item:hover {
-  background: rgba(255, 221, 0, 0.15) !important;
-  color: #ffdd00 !important;
-}
-
-.sidebar a.mat-list-item.active {
-  background: rgba(255, 221, 0, 0.25) !important;
-  color: #ffdd00 !important;
-}
-
-.sidebar a.mat-list-item mat-icon {
-  color: #aca57b !important;
-  font-size: 22px;
+.branch-btn.active {
+  background: #ffd600;
+  color: #000;
 }

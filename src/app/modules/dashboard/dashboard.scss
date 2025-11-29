@@ -76,3 +76,26 @@
   color: #dc3545;
   font-weight: 600;
 }
+.branch-switcher {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.branch-chips {
+  display: flex;
+  gap: 8px;
+}
+
+mat-chip-option {
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 10px;
+}
+
+mat-chip-option.mat-mdc-chip-selected {
+  background: #ffd600 !important;
+  color: #000 !important;
+  font-weight: bold;
+}

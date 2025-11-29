@@ -58,7 +58,9 @@ export const routes: Routes = [
   loadComponent: () =>
     import('./modules/transfers/transfer-history')
       .then(m => m.TransferHistoryComponent)
-}
+},
+
+
 
 
 

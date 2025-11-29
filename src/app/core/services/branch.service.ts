@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export interface Branch {
+  id: number;
+  name: string;
+  address: string | null;
+  active: boolean;
+}
 
 @Injectable({ providedIn: 'root' })
-export class BranchSessionService {
+export class BranchService {
 
-  private branchId = new BehaviorSubject<number>(1); // por defecto Sucursal 1
-  branchId$ = this.branchId.asObservable();
+  private api = 'http://localhost:8080/branches';
 
-  setBranch(id: number) {
-    this.branchId.next(id);
-  }
+  constructor(private http: HttpClient) {}
 
-  getBranch(): number {
-    return this.branchId.value;
+  getAll(): Observable<Branch[]> {
+    return this.http.get<Branch[]>(this.api);
   }
 }

@@ -2,17 +2,15 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface TransferRecord {
+export interface TransferHistory {
   id: number;
   productId: number;
   productName: string;
-  sourceBranchId: number;
-  sourceBranchName: string;
-  targetBranchId: number;
-  targetBranchName: string;
   quantity: number;
+  sourceBranchId: number;
+  targetBranchId: number;
   description: string;
-  user: string;
+  createdBy: string;
   createdAt: string;
 }
 
@@ -20,9 +18,9 @@ export interface TransferRecord {
 export class TransferHistoryService {
 
   private http = inject(HttpClient);
-  private api = 'http://localhost:8080/stock/transfers/history';
+  private api = 'http://localhost:8080/stock/transfers';
 
-  getHistory(): Observable<TransferRecord[]> {
-    return this.http.get<TransferRecord[]>(this.api);
+  getAll(): Observable<TransferHistory[]> {
+    return this.http.get<TransferHistory[]>(this.api);
   }
 }

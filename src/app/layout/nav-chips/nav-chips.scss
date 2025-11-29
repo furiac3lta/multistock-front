@@ -1,0 +1,18 @@
+.nav-chip-list {
+  padding: 12px 20px;
+  display: flex;
+  justify-content: flex-start;
+
+  mat-chip-option {
+    margin-right: 8px;
+    font-size: 14px;
+    padding: 4px 12px;
+    border-radius: 16px;
+
+    &.mat-mdc-chip-selected {
+      background: #ffd500 !important;
+      color: #000 !important;
+      font-weight: 600;
+    }
+  }
+}

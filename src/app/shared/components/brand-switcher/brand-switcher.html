@@ -1,0 +1,13 @@
+<div class="switcher">
+  <span class="label"></span>
+
+  <mat-chip-listbox>
+    <mat-chip-option
+      *ngFor="let b of branches"
+      [selected]="currentBranch === b.id"
+      (click)="changeBranch(b.id)"
+    >
+      {{ b.name }}
+    </mat-chip-option>
+  </mat-chip-listbox>
+</div>

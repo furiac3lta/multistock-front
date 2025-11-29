@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { CategoryForm } from './category-form';
-
+import { BranchSessionService } from '../../core/services/branch-session.service';
 @Component({
   selector: 'category-list',
   standalone: true,
@@ -18,19 +18,23 @@ export class CategoryList implements OnInit {
 
   private service = inject(CategoryService);
   private dialog = inject(MatDialog);
+  private branchSession = inject(BranchSessionService);
 
   displayedColumns = ['name', 'description', 'active', 'actions'];
   data: Category[] = [];
 
-  ngOnInit() {
-    this.loadData();
-  }
+ngOnInit() {
+  this.loadData();
+  this.branchSession.branchId$.subscribe(() => this.loadData());
+}
 
-  loadData() {
-    this.service.getAll().subscribe({
-      next: resp => this.data = resp
-    });
-  }
+loadData() {
+  this.service.getAll().subscribe(resp => {
+    // categorías son globales, no se filtran por sucursal
+    this.data = resp;
+  });
+}
+
 
   openCreate() {
     const dialogRef = this.dialog.open(CategoryForm, {

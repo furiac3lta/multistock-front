@@ -1,53 +1,20 @@
 <div class="layout">
 
-  <div class="main-area">
+  <!-- NAVBAR FIJO -->
+  <app-navbar class="navbar-fixed"></app-navbar>
 
-    <!-- SIDEBAR FIJO -->
-    <mat-sidenav-container class="sidenav-wrapper" autosize>
+  <!-- SWITCHER DE SUCURSALES -->
+  <app-branch-switcher class="branch-area"></app-branch-switcher>
 
-      <mat-sidenav #sidenav mode="side" opened class="sidebar">
-        <h2 class="logo">StockApp</h2>
+  <!-- CHIPS DE NAVEGACIÓN -->
+  <app-nav-chips class="nav-chips-area"></app-nav-chips>
 
-        <mat-nav-list>
-
-          <a mat-list-item routerLink="/">
-            <mat-icon>dashboard</mat-icon>
-            <span>Dashboard</span>
-          </a>
-
-          <a mat-list-item routerLink="/products">
-            <mat-icon>inventory</mat-icon>
-            <span>Productos</span>
-          </a>
-
-          <a mat-list-item routerLink="/categories">
-            <mat-icon>category</mat-icon>
-            <span>Categorías</span>
-          </a>
-
-          <a mat-list-item routerLink="/movements/history">
-            <mat-icon>history</mat-icon>
-            <span>Movimientos</span>
-          </a>
-
-        </mat-nav-list>
-      </mat-sidenav>
-
-      <!-- SOLO ESTO SCROLLEA -->
-<mat-sidenav-content class="content-wrapper">
-          <app-navbar class="navbar-fixed" (toggleSidebar)="toggleSidebar()"></app-navbar>
-
-      
-          <div class="content-scroll">
-  <router-outlet></router-outlet>
-              </div>
-  <app-footer class="footer-fixed"></app-footer>
-
-      </mat-sidenav-content>
-
-    </mat-sidenav-container>
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="content-scroll">
+    <router-outlet></router-outlet>
   </div>
 
   <!-- FOOTER FIJO -->
+  <app-footer class="footer-fixed"></app-footer>
 
 </div>

@@ -1,0 +1,32 @@
+<div class="switcher-container">
+
+  <!-- S U C U R S A L E S -->
+  <div class="section-title">Sucursal:</div>
+
+  <div class="chip-row">
+    <div
+      *ngFor="let b of branches"
+      class="chip"
+      [class.active]="currentBranch === b.id"
+      (click)="changeBranch(b.id)"
+    >
+      {{ b.name }}
+    </div>
+  </div>
+
+  <!-- N A V E G A C I Ó N -->
+  <div class="section-title">Navegación:</div>
+
+  <div class="chip-row">
+    <a
+      *ngFor="let item of navItems"
+      [routerLink]="item.route"
+      class="chip"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ item.label }}
+    </a>
+  </div>
+
+</div>

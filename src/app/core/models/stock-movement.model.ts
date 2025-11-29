@@ -8,4 +8,6 @@ export interface StockMovement {
   createdAt: string;
   previousStock: number;
   newStock: number;
+    branchId?: number;   // 🔥 AGREGAR ESTA LÍNEA
+
 }

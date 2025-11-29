@@ -1,7 +1,9 @@
 import { Component, Inject, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,8 +18,8 @@ import { BranchSessionService } from '../../core/services/branch-session.service
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -27,30 +29,26 @@ import { BranchSessionService } from '../../core/services/branch-session.service
 })
 export class ProductTransfer {
 
-  // 🔥 Ahora SÍ quedó inyectado correctamente y público
-  public branchSession = inject(BranchSessionService);
-
-  public branches = [
+  // Sucursales fijas (luego se puede cargar desde backend)
+  branches = [
     { id: 1, name: 'Sucursal Centro' },
     { id: 2, name: 'Sucursal Norte' },
     { id: 3, name: 'Sucursal Sur' }
   ];
 
   form = new FormGroup({
-    targetBranchId: new FormControl<number>(0, Validators.required),
-    quantity: new FormControl<number>(1, [
-      Validators.required,
-      Validators.min(1)
-    ]),
+    targetBranchId: new FormControl<number | null>(null, Validators.required),
+    quantity: new FormControl<number>(1, [Validators.required, Validators.min(1)]),
     description: new FormControl<string>(''),
   });
 
-  username = 'admin'; // temporal
+  username = 'admin'; // Se reemplaza cuando tengas auth real
 
   constructor(
     public dialogRef: MatDialogRef<ProductTransfer>,
     @Inject(MAT_DIALOG_DATA) public data: Product,
-    private transferService: StockTransferService
+    private transferService: StockTransferService,
+    public branchSession: BranchSessionService
   ) {}
 
   save() {

@@ -21,6 +21,7 @@ import { Product } from '../../core/models/product.model';
   imports: [
     CommonModule,
     FormsModule,
+
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
@@ -39,6 +40,9 @@ export class MovementHistory implements OnInit {
 
   displayedColumns = ['date', 'product', 'type', 'quantity', 'description', 'user'];
 
+  allMovements: any[] = [];
+  allProducts: Product[] = [];
+
   movements: any[] = [];
   filtered: any[] = [];
   products: Product[] = [];
@@ -48,49 +52,55 @@ export class MovementHistory implements OnInit {
   filterDateFrom!: Date | null;
   filterDateTo!: Date | null;
 
-  ngOnInit() {
-    this.loadData();
-  }
+ngOnInit() {
+  this.loadData();
+  this.branchSession.branchId$.subscribe(() => this.loadData());
+}
 
-  loadData() {
-  const branchId = this.branchSession.getBranch();
+loadData() {
+  const branch = this.branchSession.getBranch();
 
-  this.movementService.getAll().subscribe(movs => {
-    this.productService.getAll().subscribe(products => {
+  this.productService.getAll().subscribe(products => {
+    const prods = products.filter(p => p.branchId === branch);
+    const ids = prods.map(p => p.id);
 
-      this.products = products;
-
-      // 🔥 Filtrar movimientos por sucursal del PRODUCTO
-      const movementsByBranch = movs.filter(m => {
-        const prod = products.find(p => p.id === m.productId);
-        return prod && prod.branchId === branchId;
-      });
-
-      this.movements = movementsByBranch.map(m => ({
-        ...m,
-        productName: products.find(p => p.id === m.productId)?.name ?? '—'
-      }));
+    this.movementService.getAll().subscribe(movs => {
+      this.movements = movs
+        .filter(m => ids.includes(m.productId))
+        .map(m => ({
+          ...m,
+          productName: prods.find(p => p.id === m.productId)?.name ?? '—'
+        }));
 
       this.filtered = [...this.movements];
     });
   });
 }
 
- 
+  applyBranch(branchId: number) {
+
+    this.products = this.allProducts.filter(p => p.branchId === branchId);
+    const productIds = this.products.map(p => p.id);
+
+    this.movements = this.allMovements
+      .filter(m => productIds.includes(m.productId))
+      .map(m => ({
+        ...m,
+        productName: this.products.find(p => p.id === m.productId)?.name ?? '—'
+      }));
+
+    this.filtered = [...this.movements];
+  }
 
   applyFilters() {
-
     this.filtered = this.movements.filter(m => {
 
-      // PRODUCTO
       if (this.filterProduct && m.productId !== this.filterProduct)
         return false;
 
-      // TIPO
       if (this.filterType && m.movementType !== this.filterType)
         return false;
 
-      // FECHAS
       const date = new Date(m.createdAt);
 
       if (this.filterDateFrom && date < this.filterDateFrom)
@@ -104,6 +114,5 @@ export class MovementHistory implements OnInit {
 
       return true;
     });
-
   }
 }

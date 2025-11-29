@@ -2,6 +2,8 @@
 
   <h2 class="brand" *ngIf="isOpen">StockApp</h2>
 
+
+
   <nav class="menu">
 
     <a routerLink="/" routerLinkActive="active">
@@ -19,8 +21,8 @@
       <span class="label" *ngIf="isOpen">Categorías</span>
     </a>
 
-    <a routerLink="/movements" routerLinkActive="active">
-      <span class="material-icons">swap_horiz</span>
+    <a routerLink="/movements/history" routerLinkActive="active">
+      <span class="material-icons">history</span>
       <span class="label" *ngIf="isOpen">Movimientos</span>
     </a>
 

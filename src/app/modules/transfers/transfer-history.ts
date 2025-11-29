@@ -1,58 +1,63 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MatTableModule } from '@angular/material/table';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { TransferHistoryService, TransferRecord } from '../../core/services/transfer-history.service';
+import { TransferHistoryService } from '../../core/services/transfer-history.service';
+import type { TransferHistory as TransferRecord } from '../../core/services/transfer-history.service';
 import { BranchSessionService } from '../../core/services/branch-session.service';
 
 @Component({
   selector: 'transfer-history',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatSelectModule,
-    MatFormFieldModule
-  ],
+  imports: [CommonModule, MatTableModule],
   templateUrl: './transfer-history.html',
-  styleUrls: ['./transfer-history.scss']
+  styleUrls: ['./transfer-history.scss'],
 })
 export class TransferHistoryComponent implements OnInit {
 
-  private transferService = inject(TransferHistoryService);
+  private service = inject(TransferHistoryService);
   private branchSession = inject(BranchSessionService);
 
   displayedColumns = [
-    'date',
+    'createdAt',
     'product',
-    'source',
-    'target',
     'quantity',
-    'user',
+    'sourceBranch',
+    'targetBranch',
+    'createdBy',
     'description'
   ];
 
-  transfers: TransferRecord[] = [];
-  filtered: TransferRecord[] = [];
+  data: TransferRecord[] = [];
 
-  currentBranch = 0;
+  branches: Record<number, string> = {
+    1: 'Sucursal Centro',
+    2: 'Sucursal Norte',
+    3: 'Sucursal Sur'
+  };
 
   ngOnInit() {
-    this.currentBranch = this.branchSession.getBranch();
     this.loadData();
   }
 
   loadData() {
-    this.transferService.getHistory().subscribe(res => {
-      this.transfers = res;
+    const branchId = this.branchSession.getBranch();
 
-      this.filtered = res.filter(t =>
-         t.sourceBranchId === this.currentBranch ||
-         t.targetBranchId === this.currentBranch
+    this.service.getAll().subscribe(res => {
+
+      // Filtrar movimientos donde participa la sucursal logueada
+      this.data = res.filter(t =>
+        t.sourceBranchId === branchId || t.targetBranchId === branchId
+      );
+
+      // Ordenar por fecha DESC
+      this.data.sort((a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
     });
+  }
+
+  getBranchName(id: number): string {
+    return this.branches[id] ?? '—';
   }
 }

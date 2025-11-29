@@ -1,3 +1,6 @@
+
+
+
 <div class="dashboard-container">
 
   <h1 class="title">Dashboard</h1>
@@ -50,7 +53,7 @@
 
     <ul>
       <li *ngFor="let p of ultimosProductos">
-        {{ p.name }} — 
+        {{ p.name }} —
         <span>{{ p.salePrice | currency:'ARS':'symbol':'1.0-0' }}</span>
       </li>
     </ul>
@@ -62,11 +65,13 @@
 
     <ul>
       <li *ngFor="let m of ultimosMovimientos">
-        <strong>{{ m.createdAt | date:'dd/MM HH:mm' }}</strong> — 
+        <strong>{{ m.createdAt | date:'dd/MM HH:mm' }}</strong> —
         {{ m.productName }}
-        <span [class.in]="m.movementType === 'IN'"
-              [class.out]="m.movementType === 'OUT'">
-          ({{ m.movementType }})
+        <span
+          [class.in]="m.movementType === 'INCREASE'"
+          [class.out]="m.movementType === 'DECREASE'"
+        >
+          ({{ m.movementType === 'INCREASE' ? 'Ingreso' : 'Salida' }})
         </span>
         — Cant: {{ m.quantity }}
       </li>

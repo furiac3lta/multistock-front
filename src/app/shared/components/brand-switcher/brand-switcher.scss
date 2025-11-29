@@ -1,0 +1,18 @@
+.switcher {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+mat-chip-option.mat-mdc-chip-selected {
+  background: #ffd600 !important;
+  color: #000 !important;
+  font-weight: bold;
+  padding-left: 12px;
+}

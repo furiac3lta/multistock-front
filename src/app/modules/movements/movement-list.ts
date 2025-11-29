@@ -26,33 +26,48 @@ export class MovementList implements OnInit {
     'description'
   ];
 
+  allMovements: any[] = [];
+  allProducts: any[] = [];
   data: any[] = [];
 
-  ngOnInit(): void {
-    this.loadData();
-  }
+ngOnInit(): void {
+  this.loadData();
+  this.branchSession.branchId$.subscribe(() => this.loadData());
+}
 
-  loadData() {
-    const currentBranch = this.branchSession.getBranch();
+loadData() {
+  const branch = this.branchSession.getBranch();
 
-    this.movementService.getAll().subscribe((movements: any[]) => {
+  this.productService.getAll().subscribe(products => {
+    const prods = products.filter(p => p.branchId === branch);
+    const ids = prods.map(p => p.id);
 
-      // Filtrar movimientos por sucursal
-      const filteredByBranch = movements.filter(m => m.branchId === currentBranch);
+    this.movementService.getAll().subscribe(movements => {
+      const filtered = movements.filter(m => ids.includes(m.productId));
 
-      // Ordenar por fecha
-      filteredByBranch.sort((a: any, b: any) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-
-      // Cargar productos
-      this.productService.getAll().subscribe((products: any[]) => {
-
-        this.data = filteredByBranch.map((m: any) => ({
-          ...m,
-          productName: products.find(p => p.id === m.productId)?.name ?? '—'
-        }));
-      });
+      this.data = filtered.map(m => ({
+        ...m,
+        productName: prods.find(p => p.id === m.productId)?.name ?? '—'
+      }));
     });
+  });
+}
+
+
+  applyBranch(branchId: number) {
+
+    const prods = this.allProducts.filter(p => p.branchId === branchId);
+    const ids = prods.map(p => p.id);
+
+    const movs = this.allMovements.filter(m => ids.includes(m.productId));
+
+    movs.sort((a: any, b: any) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+
+    this.data = movs.map(m => ({
+      ...m,
+      productName: prods.find(p => p.id === m.productId)?.name ?? '—'
+    }));
   }
 }

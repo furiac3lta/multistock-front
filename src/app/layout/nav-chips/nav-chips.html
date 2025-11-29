@@ -1,0 +1,12 @@
+<div class="nav-chip-list">
+  <mat-chip-listbox>
+
+    <mat-chip-option
+      *ngFor="let item of items"
+      (click)="navigate(item.path)"
+    >
+      {{ item.label }}
+    </mat-chip-option>
+
+  </mat-chip-listbox>
+</div>

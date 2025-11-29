@@ -1,19 +1,26 @@
-<h2>Salida de stock</h2>
+<h2>Registrar Salida de Stock</h2>
 
-<form [formGroup]="form" class="form-container">
+<div class="form">
 
-  <mat-form-field appearance="outline" class="full">
-    <mat-label>Cantidad a descontar</mat-label>
-    <input matInput type="number" formControlName="quantity" />
+  <mat-form-field appearance="outline">
+    <mat-label>Producto</mat-label>
+    <mat-select [(ngModel)]="productId">
+      <mat-option *ngFor="let p of products" [value]="p.id">
+        {{ p.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Cantidad</mat-label>
+    <input type="number" matInput [(ngModel)]="quantity" min="1">
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full">
-    <mat-label>Descripción (opcional)</mat-label>
-    <input matInput type="text" formControlName="description" />
+    <mat-label>Descripción</mat-label>
+    <textarea matInput [(ngModel)]="description"></textarea>
   </mat-form-field>
 
-  <div class="actions">
-    <button mat-button (click)="dialogRef.close()">Cancelar</button>
-    <button mat-flat-button color="warn" (click)="save()">Descontar</button>
-  </div>
-</form>
+  <button mat-raised-button color="warn" (click)="save()">Registrar</button>
+
+</div>
