@@ -12,6 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Product } from '../../core/models/product.model';
 import { StockTransferService } from '../../core/services/stock-transfer.service';
 import { BranchSessionService } from '../../core/services/branch-session.service';
+import { BranchService, Branch } from '../../core/services/branch.service';
 
 @Component({
   selector: 'app-product-transfer',
@@ -29,12 +30,9 @@ import { BranchSessionService } from '../../core/services/branch-session.service
 })
 export class ProductTransfer {
 
-  // Sucursales fijas (luego se puede cargar desde backend)
-  branches = [
-    { id: 1, name: 'Sucursal Centro' },
-    { id: 2, name: 'Sucursal Norte' },
-    { id: 3, name: 'Sucursal Sur' }
-  ];
+  private branchService = inject(BranchService);
+
+  branches: Branch[] = [];
 
   form = new FormGroup({
     targetBranchId: new FormControl<number | null>(null, Validators.required),
@@ -42,7 +40,7 @@ export class ProductTransfer {
     description: new FormControl<string>(''),
   });
 
-  username = 'admin'; // Se reemplaza cuando tengas auth real
+  username = 'admin'; // cambiar cuando tengas auth real
 
   constructor(
     public dialogRef: MatDialogRef<ProductTransfer>,
@@ -51,8 +49,20 @@ export class ProductTransfer {
     public branchSession: BranchSessionService
   ) {}
 
+  ngOnInit() {
+    this.branchService.getAll().subscribe(b => {
+      this.branches = b.filter(x => x.id !== this.branchSession.getBranch());
+    });
+  }
+
   save() {
     if (this.form.invalid) return;
+
+    // validación lógica de stock
+    if (this.form.value.quantity! > this.data.stock) {
+      alert('No puedes transferir más stock del disponible.');
+      return;
+    }
 
     const req = {
       sourceBranchId: this.branchSession.getBranch(),
@@ -63,7 +73,9 @@ export class ProductTransfer {
       user: this.username
     };
 
-    this.transferService.transfer(req)
-      .subscribe(() => this.dialogRef.close(true));
+    this.transferService.transfer(req).subscribe({
+      next: () => this.dialogRef.close(true),
+      error: err => console.error('ERROR TRANSFER:', err)
+    });
   }
 }

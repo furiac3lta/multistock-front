@@ -7,29 +7,33 @@
     <p><strong>Producto:</strong> {{ data.name }}</p>
     <p><strong>Stock actual:</strong> {{ data.stock }}</p>
 
+    <!-- Tipo de ajuste -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Tipo de ajuste</mat-label>
-      <mat-select formControlName="type">
-        <mat-option value="INCREASE">Entrada</mat-option>
-        <mat-option value="DECREASE">Salida</mat-option>
-        <mat-option value="SET">Ajuste directo (valor exacto)</mat-option>
+      <mat-select formControlName="mode">
+        <mat-option value="INCREASE">Entrada (+)</mat-option>
+        <mat-option value="DECREASE">Salida (-)</mat-option>
+        <mat-option value="DIRECT">Ajuste directo (valor exacto)</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <div *ngIf="form.value.type !== 'SET'">
+    <!-- Entrada / Salida -->
+    <div *ngIf="form.value.mode !== 'DIRECT'">
       <mat-form-field appearance="outline" class="full">
         <mat-label>Cantidad</mat-label>
-        <input type="number" matInput formControlName="quantity" min="1">
+        <input matInput type="number" formControlName="quantity" min="1">
       </mat-form-field>
     </div>
 
-    <div *ngIf="form.value.type === 'SET'">
+    <!-- Ajuste DIRECTO -->
+    <div *ngIf="form.value.mode === 'DIRECT'">
       <mat-form-field appearance="outline" class="full">
-        <mat-label>Nuevo valor</mat-label>
-        <input type="number" matInput formControlName="newValue" min="0">
+        <mat-label>Nuevo valor de stock</mat-label>
+        <input matInput type="number" formControlName="newValue" min="0">
       </mat-form-field>
     </div>
 
+    <!-- Descripción -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Descripción</mat-label>
       <textarea matInput formControlName="description"></textarea>

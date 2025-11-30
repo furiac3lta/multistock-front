@@ -11,10 +11,7 @@
     <mat-form-field appearance="outline" class="full">
       <mat-label>Sucursal destino</mat-label>
       <mat-select formControlName="targetBranchId">
-        <mat-option
-          *ngFor="let b of branches"
-          [value]="b.id"
-          [disabled]="b.id === branchSession.getBranch()">
+        <mat-option *ngFor="let b of branches" [value]="b.id">
           {{ b.name }}
         </mat-option>
       </mat-select>
@@ -29,7 +26,7 @@
     <!-- Descripción -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Descripción</mat-label>
-      <textarea matInput formControlName="description"></textarea>
+      <textarea matInput rows="3" formControlName="description"></textarea>
     </mat-form-field>
 
   </form>

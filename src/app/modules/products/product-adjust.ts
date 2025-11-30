@@ -10,8 +10,6 @@ import { MatOptionModule } from '@angular/material/core';
 
 import { Product } from '../../core/models/product.model';
 import { StockService } from '../../core/services/stock.service';
-
-// 🔥 USAR EL ENUM GLOBAL
 import { MovementType } from '../../core/models/movement-type.enum';
 
 @Component({
@@ -31,7 +29,7 @@ import { MovementType } from '../../core/models/movement-type.enum';
 export class ProductAdjust {
 
   form = new FormGroup({
-    type: new FormControl<'INCREASE' | 'DECREASE' | 'SET'>('INCREASE', Validators.required),
+    mode: new FormControl<'DIRECT' | 'INCREASE' | 'DECREASE'>('INCREASE', Validators.required),
     quantity: new FormControl<number | null>(null, [Validators.min(1)]),
     newValue: new FormControl<number | null>(null, [Validators.min(0)]),
     description: new FormControl<string | null>(''),
@@ -48,35 +46,38 @@ export class ProductAdjust {
   save() {
     if (this.form.invalid) return;
 
-    const type = this.form.value.type!;
+    const mode = this.form.value.mode!;
     const desc = this.form.value.description ?? '';
-    const currentStock = this.data.stock;
+    const current = this.data.stock;
 
-    // -------------------------
-    //       SET MODE
-    // -------------------------
-    if (type === 'SET') {
+    // ===================================================
+    //               AJUSTE DIRECTO (SET VIRTUAL)
+    // ===================================================
+    if (mode === 'DIRECT') {
 
-      const newValue = this.form.value.newValue;
+      const newValue = this.form.value.newValue!;
+      if (newValue == null) return;
 
-      if (newValue == null || newValue < 0) return;
+      const diff = newValue - current;
 
-      const diff = newValue - currentStock;
+      // No cambia nada
+      if (diff === 0) {
+        this.dialogRef.close(true);
+        return;
+      }
 
-      if (diff === 0) return this.dialogRef.close(true);
+      const type = diff > 0 ? MovementType.INCREASE : MovementType.DECREASE;
+      const qty = Math.abs(diff);
 
-      const movementType =
-        diff > 0 ? MovementType.INCREASE : MovementType.DECREASE;
-
-      if (movementType === MovementType.DECREASE && Math.abs(diff) > currentStock) {
-        alert('No puedes dejar el stock en negativo');
+      if (type === MovementType.DECREASE && qty > current) {
+        alert('No puedes dejar stock negativo');
         return;
       }
 
       this.service.moveStock(
         this.data.id!,
-        Math.abs(diff),
-        movementType,
+        qty,
+        type,
         desc,
         this.username
       ).subscribe(() => this.dialogRef.close(true));
@@ -84,25 +85,24 @@ export class ProductAdjust {
       return;
     }
 
-    // -------------------------
-    //   INCREASE / DECREASE
-    // -------------------------
-    const quantity = this.form.value.quantity!;
-
-    if (quantity <= 0) {
+    // ===================================================
+    //      AJUSTE NORMAL (INCREASE / DECREASE)
+    // ===================================================
+    const qty = this.form.value.quantity!;
+    if (qty <= 0) {
       alert('La cantidad debe ser mayor a 0');
       return;
     }
 
-    if (type === 'DECREASE' && quantity > currentStock) {
-      alert('No puedes retirar más stock del disponible');
+    if (mode === 'DECREASE' && qty > current) {
+      alert('No puedes retirar más stock del que hay');
       return;
     }
 
     this.service.moveStock(
       this.data.id!,
-      quantity,
-      type as MovementType,
+      qty,
+      mode as MovementType,
       desc,
       this.username
     ).subscribe(() => this.dialogRef.close(true));
