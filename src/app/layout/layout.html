@@ -1,15 +1,18 @@
 <div class="layout">
 
-  <!-- NAVBAR FIJO -->
+  <!-- NAVBAR FIJO (FUERA DEL SCROLL) -->
   <app-navbar class="navbar-fixed"></app-navbar>
 
-  <!-- SWITCHER DE SUCURSALES -->
-  <app-branch-switcher class="branch-area"></app-branch-switcher>
+  <!-- HEADER + SWITCHER (PUEDEN IR JUNTOS) -->
+  <div class="top-controls">
+   
+  
+  </div>
 
-  <!-- CHIPS DE NAVEGACIÓN -->
-  <app-nav-chips class="nav-chips-area"></app-nav-chips>
+  <!-- TABS DE NAVEGACIÓN (DEBEN ESTAR DENTRO DEL LAYOUT) -->
+  <app-tabs></app-tabs>
 
-  <!-- CONTENIDO PRINCIPAL -->
+  <!-- CONTENIDO PRINCIPAL (ROUTER) -->
   <div class="content-scroll">
     <router-outlet></router-outlet>
   </div>

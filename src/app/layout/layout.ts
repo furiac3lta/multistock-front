@@ -3,8 +3,9 @@ import { RouterOutlet } from '@angular/router';
 
 import { Navbar } from './navbar';
 import { Footer } from './footer';
-import { BranchSwitcher } from "../shared/components/brand-switcher/brand-switcher";
-import { NavChips } from './nav-chips/nav-chips';
+
+import { AppTabs } from "./nav-tabs";
+
 
 @Component({
   selector: 'app-layout',
@@ -13,9 +14,11 @@ import { NavChips } from './nav-chips/nav-chips';
     RouterOutlet,
     Navbar,
     Footer,
-    BranchSwitcher,
-    NavChips
-  ],
+   
+    AppTabs,
+   
+  
+],
   templateUrl: './layout.html',
   styleUrls: ['./layout.scss']
 })

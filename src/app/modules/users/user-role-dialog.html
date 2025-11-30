@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Cambiar Rol</h2>
+
+<div mat-dialog-content>
+
+  <p><strong>Usuario:</strong> {{ data.username }}</p>
+
+  <form [formGroup]="form">
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Nuevo Rol</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let r of roles" [value]="r">
+          {{ r }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="save()">Guardar</button>
+</div>

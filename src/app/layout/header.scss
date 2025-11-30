@@ -1,0 +1,40 @@
+.header {
+  width: 100%;
+  height: 64px;
+  background: white;
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.right .config-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}

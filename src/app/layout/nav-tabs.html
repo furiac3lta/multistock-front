@@ -1,0 +1,15 @@
+<nav class="tabs-container">
+  <ul class="tabs-list">
+
+    <li
+      *ngFor="let item of items"
+      class="tab-item"
+      [routerLink]="item.path"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ item.label }}
+    </li>
+
+  </ul>
+</nav>

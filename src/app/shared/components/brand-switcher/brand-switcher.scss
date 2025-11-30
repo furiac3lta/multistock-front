@@ -1,18 +1,36 @@
 .switcher {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .label {
-  font-weight: 600;
+  color: #aaa;
   font-size: 14px;
+  font-weight: 600;
 }
 
-mat-chip-option.mat-mdc-chip-selected {
-  background: #ffd600 !important;
-  color: #000 !important;
-  font-weight: bold;
-  padding-left: 12px;
+.switcher-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.switcher-item {
+  font-size: 15px;
+  color: #ddd;
+  cursor: pointer;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: 0.2s ease;
+}
+
+.switcher-item:hover {
+  color: #fff;
+}
+
+.switcher-item.active {
+  color: #ffe600; /* Amarillo patito */
+  border-bottom: 2px solid #ffe600;
+  font-weight: 600;
 }

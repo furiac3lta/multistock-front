@@ -1,0 +1,37 @@
+<div class="log-container">
+
+  <div class="header">
+    <h2>Auditoría de movimientos</h2>
+
+    <input placeholder="Buscar usuario / sucursal / acción"
+           [(ngModel)]="search"
+           (input)="filter()">
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Usuario</th>
+        <th>Acción</th>
+        <th>Sucursal</th>
+        <th>Antes</th>
+        <th>Después</th>
+        <th>IP</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let l of filtered">
+        <td>{{ l.createdAt | date:'short' }}</td>
+        <td>{{ l.username }}</td>
+        <td class="action">{{ l.action }}</td>
+        <td>{{ l.branchName }}</td>
+        <td>{{ l.beforeStock }}</td>
+        <td>{{ l.afterStock }}</td>
+        <td>{{ l.ip }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

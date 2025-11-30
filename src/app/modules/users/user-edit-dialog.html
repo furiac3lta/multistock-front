@@ -1,0 +1,29 @@
+<h2 class="title">Editar usuario</h2>
+
+<form [formGroup]="form" class="form">
+
+  <div class="form-group">
+    <label>Nombre completo</label>
+    <input type="text" formControlName="fullName">
+  </div>
+
+  <div class="form-group">
+    <label>Teléfono</label>
+    <input type="text" formControlName="phone">
+  </div>
+
+  <div class="form-group">
+    <label>Sucursal</label>
+    <select formControlName="branchId">
+      <option *ngFor="let b of branches" [value]="b.id">
+        {{ b.name }}
+      </option>
+    </select>
+  </div>
+
+</form>
+
+<div class="actions">
+  <button class="cancel" (click)="dialogRef.close()">Cancelar</button>
+  <button class="save" (click)="save()">Guardar</button>
+</div>
