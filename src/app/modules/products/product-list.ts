@@ -8,6 +8,8 @@ import { ProductForm } from './product-form';
 import { Product } from '../../core/models/product.model';
 import { CommonModule } from '@angular/common';
 import { BranchSessionService } from '../../core/services/branch-session.service';
+import { ExportService } from '../../core/services/export.service';
+
 
 @Component({
   selector: 'product-list',
@@ -25,6 +27,8 @@ export class ProductList implements OnInit {
   private productService = inject(ProductService);
   private dialog = inject(MatDialog);
   private branchSession = inject(BranchSessionService);
+private exportService = inject(ExportService);
+
 
   displayedColumns = [
     'name', 'sku', 'stock', 'costPrice', 'salePrice', 'category', 'actions'
@@ -124,4 +128,36 @@ loadProducts() {
 
     });
   }
+  exportarExcel() {
+  this.exportService.exportProducts(this.products);
+}
+exportarPDF() {
+  this.exportService.exportProductsPdf(this.products);
+}
+triggerExcel() {
+  document.getElementById('excelInput')?.click();
+}
+
+importarExcel(event: any) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  import('../../core/excel-import.util').then(m => {
+    m.readExcel(file).then(rows => {
+
+      // 🚀 Mando la lista al backend
+   this.productService.importProducts(rows).subscribe({
+  next: () => {
+    alert('Importación exitosa');
+    this.loadProducts(); // Recargar lista
+  },
+  error: err => console.error(err)
+});
+
+
+    });
+  });
+}
+
+
 }

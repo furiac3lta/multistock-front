@@ -5,6 +5,25 @@
     <mat-icon>add</mat-icon>
     Nuevo Producto
   </button>
+<div class="actions" style="margin-bottom: 10px;">
+  <button mat-raised-button color="primary" (click)="exportarExcel()">
+    <mat-icon>table_view</mat-icon>
+    Exportar Excel
+  </button>
+
+  <button mat-raised-button color="accent" (click)="exportarPDF()">
+    <mat-icon>picture_as_pdf</mat-icon>
+    Exportar PDF
+  </button>
+</div>
+<div class="actions">
+  <input type="file" id="excelInput" hidden (change)="importarExcel($event)">
+  
+  <button mat-raised-button color="warn" (click)="triggerExcel()">
+    <mat-icon>upload</mat-icon> Importar Excel
+  </button>
+</div>
+
 </div>
 
 <table mat-table [dataSource]="products" class="mat-elevation-z2">

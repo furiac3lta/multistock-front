@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { Navbar } from './navbar';
 import { Footer } from './footer';
-
+import { GlobalLoaderComponent } from '../components/global-loader/global-loader';
 import { AppTabs } from "./nav-tabs";
 
 
@@ -15,7 +15,7 @@ import { AppTabs } from "./nav-tabs";
     RouterOutlet,
     Navbar,
     Footer,
-   
+   GlobalLoaderComponent,
     AppTabs,
    
   

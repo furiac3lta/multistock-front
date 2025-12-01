@@ -26,4 +26,8 @@ export class StockMovementService {
       params: { quantity, type, description, user }
     });
   }
+  getLast30Days(branchId: number) {
+  return this.http.get<any[]>(`http://localhost:8080/dashboard/movements-30/${branchId}`);
+}
+
 }

@@ -24,4 +24,8 @@ export class CategoryService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.api}/${id}`);
   }
+  getStockSummary(branchId: number) {
+  return this.http.get<any[]>(`http://localhost:8080/dashboard/stock-category/${branchId}`);
+}
+
 }

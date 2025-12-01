@@ -29,4 +29,8 @@ export class BranchService {
   currentBranchId(): number {
     return this._currentBranchId;
   }
+  getSummary() {
+  return this.http.get<any[]>(`http://localhost:8080/dashboard/stock-branch`);
+}
+
 }

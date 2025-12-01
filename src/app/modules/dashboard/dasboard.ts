@@ -2,12 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+
 import { ProductService } from '../../core/services/product.service';
 import { CategoryService } from '../../core/services/category.service';
 import { StockMovementService } from '../../core/services/stock-movement.service';
 import { BranchService, Branch } from '../../core/services/branch.service';
 import { BranchSessionService } from '../../core/services/branch-session.service';
 
+import Chart from 'chart.js/auto';
 import { Product } from '../../core/models/product.model';
 
 @Component({
@@ -39,21 +41,22 @@ export class Dashboard implements OnInit {
   ultimosProductos: Product[] = [];
   ultimosMovimientos: any[] = [];
 
-  async ngOnInit() {
+  // 👇 instancias de gráficos (para destruirlos después)
+  private chartCategory: any;
+  private chartBranch: any;
+  private chartMovements: any;
 
+  ngOnInit() {
     this.loading = true;
 
-    // 1️⃣ Cargar sucursales
     this.branchService.getAll().subscribe(branches => {
       this.branches = branches;
 
       const saved = this.branchSession.getBranch();
       this.currentBranch = branches.some(b => b.id === saved) ? saved : branches[0].id;
 
-      // 2️⃣ Cargar datos según la sucursal actual
       this.loadDashboard(this.currentBranch);
 
-      // 3️⃣ Escuchar cambios
       this.branchSession.branchId$.subscribe(id => {
         this.currentBranch = id;
         this.loadDashboard(id);
@@ -64,10 +67,8 @@ export class Dashboard implements OnInit {
   }
 
   loadDashboard(branchId: number) {
-
     this.loading = true;
 
-    // 📌 Pedir productos directo al backend
     this.productService.getAll().subscribe(products => {
       const prods = products.filter(p => p.branchId === branchId);
 
@@ -85,9 +86,7 @@ export class Dashboard implements OnInit {
         this.totalCategorias = cats.length;
       });
 
-      // 📌 Pedir movimientos directo al backend
       this.movementService.getAll().subscribe(movs => {
-
         const ids = prods.map(p => p.id);
         const filtered = movs.filter(m => ids.includes(m.productId));
 
@@ -110,8 +109,9 @@ export class Dashboard implements OnInit {
         this.loading = false;
       });
 
+      // 👇 ACÁ LLAMAMOS A LOS GRÁFICOS
+      this.loadCharts(branchId);
     });
-
   }
 
   changeBranch(id: number) {
@@ -119,4 +119,77 @@ export class Dashboard implements OnInit {
     this.branchSession.setBranch(id);
     this.loadDashboard(id);
   }
+
+  // =====================================================
+  //                    GRÁFICOS
+  // =====================================================
+
+  loadCharts(branchId: number) {
+
+    // ⚠️ Destruir gráficos previos
+    if (this.chartCategory) this.chartCategory.destroy();
+    if (this.chartBranch) this.chartBranch.destroy();
+    if (this.chartMovements) this.chartMovements.destroy();
+
+    this.categoryService.getStockSummary(branchId).subscribe(r => {
+      this.chartCategory = this.renderCategoryChart(r);
+    });
+
+    this.branchService.getSummary().subscribe(r => {
+      this.chartBranch = this.renderBranchChart(r);
+    });
+
+  this.movementService.getLast30Days(branchId).subscribe(r => {
+
+  const ordered = r.sort((a, b) =>
+    new Date(a.day).getTime() - new Date(b.day).getTime()
+  );
+
+  this.renderMovementsChart(ordered);
+});
+
+  }
+
+  renderCategoryChart(data: any[]) {
+    return new Chart('chartCategory', {
+      type: 'bar',
+      data: {
+        labels: data.map(x => x.category),
+        datasets: [{
+          label: 'Stock total',
+          data: data.map(x => x.totalStock),
+          backgroundColor: '#ffdd00'
+        }]
+      }
+    });
+  }
+
+  renderBranchChart(data: any[]) {
+    return new Chart('chartBranch', {
+      type: 'pie',
+      data: {
+        labels: data.map(x => x.branch),
+        datasets: [{
+          label: 'Productos',
+          data: data.map(x => x.count),
+          backgroundColor: ['#ffdd00','#00c853','#2962ff','#d50000']
+        }]
+      }
+    });
+  }
+
+  renderMovementsChart(data: any[]) {
+    return new Chart('chartMovements', {
+      type: 'line',
+      data: {
+        labels: data.map(x => x.day),
+        datasets: [{
+          label: 'Movimientos',
+          data: data.map(x => x.count),
+          borderColor: '#2962ff'
+        }]
+      }
+    });
+  }
+
 }

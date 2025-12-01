@@ -3,9 +3,7 @@
   <div class="header">
     <h2>Auditoría de movimientos</h2>
 
-    <input placeholder="Buscar por cualquier dato..."
-           [(ngModel)]="search"
-           (input)="filter()">
+    <input placeholder="Buscar por cualquier dato..." [(ngModel)]="search" (input)="filter()">
   </div>
 
   <table>
@@ -37,11 +35,12 @@
         <!-- Etiquetas visuales -->
         <td>
           <span [ngClass]="{
-              'tag-inc': l.movementType.startsWith('TRANSFER_IN') || l.movementType.endsWith('INCREASE'),
-              'tag-dec': l.movementType.startsWith('TRANSFER_OUT') || l.movementType.endsWith('DECREASE')
-          }">
-            {{ l.movementType }}
+    'tag-inc': (l.movementType || '').startsWith('TRANSFER_IN') || (l.movementType || '').endsWith('INCREASE'),
+    'tag-dec': (l.movementType || '').startsWith('TRANSFER_OUT') || (l.movementType || '').endsWith('DECREASE')
+      }">
+            {{ l.movementType || '-' }}
           </span>
+
         </td>
 
         <td>{{ l.quantity }}</td>

@@ -34,4 +34,11 @@ export class ProductService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.api}/${id}`);
   }
+
+importProducts(rows: any[]) {
+  return this.http.post(`${this.api}/import`, rows);
+}
+
+
+
 }

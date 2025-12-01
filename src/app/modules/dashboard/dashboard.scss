@@ -99,3 +99,16 @@ mat-chip-option.mat-mdc-chip-selected {
   color: #000 !important;
   font-weight: bold;
 }
+.charts-grid {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-top: 20px;
+}
+
+.chart-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
