@@ -40,6 +40,13 @@ export const routes: Routes = [
           import('./modules/categories/category-list')
             .then(m => m.CategoryList)
       },
+      {
+        path: 'logs',
+        loadComponent: () =>
+          import('./modules/logs/log-list')
+            .then(m => m.LogList)
+      },
+
 
       // MOVIMIENTOS
       {
@@ -84,7 +91,9 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./modules/users/user-list')
             .then(m => m.UserList)
-      }
+      },
+
+
 
     ]
   }

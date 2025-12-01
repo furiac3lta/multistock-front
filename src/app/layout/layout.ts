@@ -7,6 +7,7 @@ import { Footer } from './footer';
 import { AppTabs } from "./nav-tabs";
 
 
+
 @Component({
   selector: 'app-layout',
   standalone: true,

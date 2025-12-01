@@ -15,6 +15,8 @@ export class AppTabs {
     { label: 'Dashboard', path: '/' },
     { label: 'Productos', path: '/products' },
     { label: 'Categorías', path: '/categories' },
-    { label: 'Movimientos', path: '/movements/history' }
+    { label: 'Movimientos', path: '/movements/history' },
+    { label: 'Historial', path: '/logs' }
+
   ];
 }

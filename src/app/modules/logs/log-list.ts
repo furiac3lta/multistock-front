@@ -27,6 +27,7 @@ export class LogList {
   load() {
     this.logService.findAll().subscribe({
       next: resp => {
+        console.log('LOGS => ', resp);
         this.logs = resp;
         this.filtered = resp;
       },
@@ -36,10 +37,14 @@ export class LogList {
 
   filter() {
     const s = this.search.toLowerCase().trim();
+
     this.filtered = this.logs.filter(l =>
-      l.username.toLowerCase().includes(s) ||
-      l.branchName?.toLowerCase().includes(s) ||
-      l.action.toLowerCase().includes(s)
+      (l.username || '').toLowerCase().includes(s) ||
+      (l.productName || '').toLowerCase().includes(s) ||
+      (l.branchName || '').toLowerCase().includes(s) ||
+      (l.originBranchName || '').toLowerCase().includes(s) ||
+      (l.movementType || '').toLowerCase().includes(s) ||
+      (l.description || '').toLowerCase().includes(s)
     );
   }
 }

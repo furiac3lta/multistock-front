@@ -39,3 +39,29 @@ table {
     color: #0d6efd;
   }
 }
+.tag-inc {
+  color: #0a0;
+  font-weight: bold;
+}
+
+.tag-dec {
+  color: #c00;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead {
+  background: #f2f2f2;
+  font-weight: bold;
+}
+
+td, th {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+}

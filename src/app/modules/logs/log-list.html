@@ -3,7 +3,7 @@
   <div class="header">
     <h2>Auditoría de movimientos</h2>
 
-    <input placeholder="Buscar usuario / sucursal / acción"
+    <input placeholder="Buscar por cualquier dato..."
            [(ngModel)]="search"
            (input)="filter()">
   </div>
@@ -13,8 +13,12 @@
       <tr>
         <th>Fecha</th>
         <th>Usuario</th>
+        <th>Producto</th>
         <th>Acción</th>
-        <th>Sucursal</th>
+        <th>Cantidad</th>
+        <th>Descripción</th>
+        <th>Sucursal Origen</th>
+        <th>Sucursal Destino</th>
         <th>Antes</th>
         <th>Después</th>
         <th>IP</th>
@@ -23,15 +27,37 @@
 
     <tbody>
       <tr *ngFor="let l of filtered">
-        <td>{{ l.createdAt | date:'short' }}</td>
+
+        <td>{{ l.createdAt | date: 'short' }}</td>
+
         <td>{{ l.username }}</td>
-        <td class="action">{{ l.action }}</td>
+
+        <td>{{ l.productName }}</td>
+
+        <!-- Etiquetas visuales -->
+        <td>
+          <span [ngClass]="{
+              'tag-inc': l.movementType.startsWith('TRANSFER_IN') || l.movementType.endsWith('INCREASE'),
+              'tag-dec': l.movementType.startsWith('TRANSFER_OUT') || l.movementType.endsWith('DECREASE')
+          }">
+            {{ l.movementType }}
+          </span>
+        </td>
+
+        <td>{{ l.quantity }}</td>
+
+        <td>{{ l.description || '-' }}</td>
+
+        <td>{{ l.originBranchName || '-' }}</td>
+
         <td>{{ l.branchName }}</td>
+
         <td>{{ l.beforeStock }}</td>
+
         <td>{{ l.afterStock }}</td>
+
         <td>{{ l.ip }}</td>
       </tr>
     </tbody>
   </table>
-
 </div>

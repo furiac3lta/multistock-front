@@ -1,12 +1,19 @@
 export interface LogMovement {
   id: number;
   createdAt: string;
-  action: string;
+
   username: string;
-  productId: number;
-  branchId: number;
+
+  movementType: string;
+  productName: string;
+  quantity: number;
+  description: string;
+
   branchName: string;
+  originBranchName: string;
+
   beforeStock: number;
   afterStock: number;
+
   ip: string;
 }
