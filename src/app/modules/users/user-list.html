@@ -1,10 +1,16 @@
 <div class="users-container">
 
     <div class="header">
-        <h2>Usuarios</h2>
-        <button class="create-btn" (click)="openCreate()">+ Crear usuario</button>
+        <div class="title-block">
+            <p class="eyebrow">Gestión</p>
+            <h2>Usuarios</h2>
+        </div>
+        <button class="create-btn" (click)="openCreate()">
+            <span class="plus">+</span> Nuevo usuario
+        </button>
     </div>
 
+    <div class="table-card">
     <table>
         <thead>
             <tr>
@@ -31,13 +37,13 @@
                 </td>
 
                 <td class="actions">
-                    <button class="action-btn" (click)="openEdit(u)">Editar</button>
+                    <button class="action-btn ghost" (click)="openEdit(u)">Editar</button>
 
-                    <button class="action-btn" (click)="openPassword(u)">Cambiar contraseña</button>
+                    <button class="action-btn ghost" (click)="openPassword(u)">Contraseña</button>
 
-                    <button class="action-btn" (click)="openRole(u)">Rol</button>
+                    <button class="action-btn ghost" (click)="openRole(u)">Rol</button>
 
-                    <button class="action-btn deactivate-btn" (click)="toggle(u)">
+                    <button class="action-btn warn" (click)="toggle(u)">
                         {{ u.active ? "Desactivar" : "Activar" }}
                     </button>
                 </td>
@@ -46,5 +52,6 @@
             </tr>
         </tbody>
     </table>
+    </div>
 
 </div>

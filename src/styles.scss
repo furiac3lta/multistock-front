@@ -94,9 +94,9 @@ html, body {
 .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 18px !important;
   padding: 18px !important;
-  background: radial-gradient(circle at 12% 12%, rgba(250, 204, 21, 0.08), transparent 32%),
-              radial-gradient(circle at 88% 10%, rgba(59, 130, 246, 0.08), transparent 30%),
-              var(--surface-card) !important;
+  background: radial-gradient(circle at 12% 12%, rgba(250, 204, 21, 0.12), transparent 28%),
+              radial-gradient(circle at 88% 10%, rgba(59, 130, 246, 0.12), transparent 26%),
+              var(--surface-strong) !important;
   border: 1px solid var(--surface-border) !important;
   box-shadow: var(--shadow-elevated) !important;
   color: var(--text-primary) !important;
