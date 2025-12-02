@@ -1,7 +1,8 @@
 .title {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 700;
   margin-bottom: 20px;
+  color: var(--text-primary);
 }
 
 .form {
@@ -15,19 +16,23 @@
   flex-direction: column;
 
   label {
-    font-weight: 600;
-    margin-bottom: 4px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
   }
 
   input, select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
     font-size: 14px;
+    background: var(--bg-muted);
+    color: var(--text-primary);
 
     &:focus {
       outline: none;
-      border-color: #1976d2;
+      border-color: var(--color-amber);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-amber) 30%, transparent);
     }
   }
 }
@@ -39,28 +44,31 @@
   gap: 10px;
 
   .cancel {
-    padding: 8px 14px;
-    background: #888;
-    color: white;
-    border-radius: 6px;
-    border: none;
+    padding: 10px 14px;
+    background: var(--bg-muted);
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
     cursor: pointer;
 
     &:hover {
-      background: #666;
+      background: var(--bg-surface);
     }
   }
 
   .save {
-    padding: 8px 14px;
-    background: #1976d2;
-    color: white;
-    border-radius: 6px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, var(--color-magenta), var(--color-amber));
+    color: #0f2545;
+    border-radius: var(--radius-md);
     border: none;
     cursor: pointer;
+    font-weight: 700;
+    box-shadow: var(--shadow-soft);
 
     &:hover {
-      background: #115293;
+      box-shadow: var(--shadow-strong);
+      transform: translateY(-2px);
     }
   }
 }

@@ -2,17 +2,28 @@
   padding: 12px 20px;
   display: flex;
   justify-content: flex-start;
+  gap: 10px;
+}
 
-  mat-chip-option {
-    margin-right: 8px;
-    font-size: 14px;
-    padding: 4px 12px;
-    border-radius: 16px;
+mat-chip-option {
+  margin-right: 4px;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 16px;
+  background: var(--bg-muted) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-subtle) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-    &.mat-mdc-chip-selected {
-      background: #ffd500 !important;
-      color: #000 !important;
-      font-weight: 600;
-    }
-  }
+mat-chip-option:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
+mat-chip-option.mat-mdc-chip-selected {
+  background: linear-gradient(135deg, var(--color-violet), var(--color-sunset)) !important;
+  color: #0f2545 !important;
+  font-weight: 700;
+  box-shadow: var(--shadow-strong);
 }
