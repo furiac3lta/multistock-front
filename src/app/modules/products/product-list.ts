@@ -14,6 +14,7 @@ import { ExportService } from '../../core/services/export.service';
   selector: 'product-list',
   standalone: true,
   templateUrl: './product-list.html',
+  styleUrls: ['./product-list.scss'],
   imports: [
     CommonModule,
     MatTableModule,
