@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 import { UserService } from '../../core/services/user.service';
 import { User } from './user.model';
 import { UserPasswordDialog } from './user-password-dialog';
@@ -11,7 +12,7 @@ import { UserRoleDialog } from './user-role-dialog';
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatTableModule],
   templateUrl: './user-list.html',
   styleUrls: ['./user-list.scss']
 })
@@ -21,6 +22,8 @@ export class UserList {
   private userService = inject(UserService);
 
   users: User[] = [];
+
+  displayedColumns = ['username', 'fullName', 'roles', 'branchName', 'active', 'actions'];
 
   ngOnInit() {
     this.loadUsers();

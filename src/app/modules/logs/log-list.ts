@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { LogService } from './log.service';
 import { LogMovement } from './log.model';
 import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-log-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatTableModule],
   templateUrl: './log-list.html',
   styleUrls: ['./log-list.scss']
 })
@@ -17,6 +18,20 @@ export class LogList {
 
   logs: LogMovement[] = [];
   filtered: LogMovement[] = [];
+
+  displayedColumns = [
+    'createdAt',
+    'username',
+    'productName',
+    'movementType',
+    'quantity',
+    'description',
+    'originBranchName',
+    'branchName',
+    'beforeStock',
+    'afterStock',
+    'ip'
+  ];
 
   search = '';
 
