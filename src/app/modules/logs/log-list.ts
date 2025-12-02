@@ -1,13 +1,24 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 import { LogService } from './log.service';
 import { LogMovement } from './log.model';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-log-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule
+  ],
   templateUrl: './log-list.html',
   styleUrls: ['./log-list.scss']
 })
@@ -20,6 +31,20 @@ export class LogList {
 
   search = '';
 
+  displayedColumns = [
+    'createdAt',
+    'username',
+    'productName',
+    'movementType',
+    'quantity',
+    'description',
+    'originBranchName',
+    'branchName',
+    'beforeStock',
+    'afterStock',
+    'ip'
+  ];
+
   ngOnInit() {
     this.load();
   }
@@ -27,7 +52,6 @@ export class LogList {
   load() {
     this.logService.findAll().subscribe({
       next: resp => {
-        console.log('LOGS => ', resp);
         this.logs = resp;
         this.filtered = resp;
       },
