@@ -37,43 +37,41 @@ html {
 }
 
 body.theme-light {
-  --bg-body: linear-gradient(135deg, rgba(15, 37, 69, 0.05), rgba(244, 119, 59, 0.08)), #f7f8ff;
+  --bg-body: #eef1f7;
   --bg-surface: #ffffff;
-  --bg-elevated: #f9f4ff;
-  --bg-muted: #eef1fb;
+  --bg-elevated: #f6f7fb;
+  --bg-muted: #e7eaf5;
   --text-primary: #0f2545;
-  --text-secondary: #3c486b;
-  --text-muted: #6e7796;
-  --border-subtle: rgba(15, 37, 69, 0.1);
+  --text-secondary: #334165;
+  --text-muted: #6b7695;
+  --border-subtle: rgba(15, 37, 69, 0.12);
   --overlay: rgba(15, 37, 69, 0.55);
 }
 
 body.theme-dark {
-  --bg-body: radial-gradient(circle at 20% 20%, rgba(228, 79, 106, 0.12), transparent 35%),
-    radial-gradient(circle at 80% 10%, rgba(115, 60, 155, 0.12), transparent 32%),
-    linear-gradient(180deg, #0f2545, #0b1a34);
-  --bg-surface: #12172a;
-  --bg-elevated: #182143;
-  --bg-muted: rgba(255, 255, 255, 0.05);
+  --bg-body: #0e1323;
+  --bg-surface: #11182e;
+  --bg-elevated: #161f35;
+  --bg-muted: #1c2640;
   --text-primary: #eef2ff;
   --text-secondary: #c7cbe2;
   --text-muted: #9aa3c2;
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --overlay: rgba(0, 0, 0, 0.55);
+  --overlay: rgba(0, 0, 0, 0.6);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  --bg-body: linear-gradient(180deg, #0f2545, #0b1a34);
-  --bg-surface: #12172a;
-  --bg-elevated: #182143;
-  --bg-muted: rgba(255, 255, 255, 0.05);
+  --bg-body: #0e1323;
+  --bg-surface: #11182e;
+  --bg-elevated: #161f35;
+  --bg-muted: #1c2640;
   --text-primary: #eef2ff;
   --text-secondary: #c7cbe2;
   --text-muted: #9aa3c2;
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --overlay: rgba(0, 0, 0, 0.55);
+  --overlay: rgba(0, 0, 0, 0.6);
   background: var(--bg-body);
   color: var(--text-primary);
   font-family: 'Inter', Roboto, 'Helvetica Neue', sans-serif;
@@ -140,22 +138,23 @@ button[mat-raised-button] {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--color-violet), var(--color-sunset));
-  color: #fff !important;
+  background: var(--color-amber);
+  color: #0f2545 !important;
   border: none;
   padding: 10px 18px;
   border-radius: 28px;
   font-size: 15px;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(228, 79, 106, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .btn-add:hover,
 button.mat-mdc-raised-button:hover,
 button[mat-raised-button]:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(243, 119, 59, 0.35);
+  background: color-mix(in srgb, var(--color-amber) 85%, white);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
 }
 
 button[mat-button] {
@@ -277,7 +276,7 @@ table tbody tr:hover {
 // =============================
 .mat-mdc-standard-chip.mdc-evolution-chip--selected,
 .mat-mdc-chip.mat-mdc-chip-selected {
-  background: linear-gradient(135deg, var(--color-magenta), var(--color-amber)) !important;
+  background: var(--color-amber) !important;
   color: #0f2545 !important;
   font-weight: 700;
 }

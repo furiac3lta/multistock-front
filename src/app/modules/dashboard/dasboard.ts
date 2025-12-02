@@ -46,6 +46,10 @@ export class Dashboard implements OnInit {
   private chartBranch: any;
   private chartMovements: any;
 
+  get branchName() {
+    return this.branches.find(b => b.id === this.currentBranch)?.name ?? 'Sucursal';
+  }
+
   ngOnInit() {
     this.loading = true;
 
@@ -139,18 +143,18 @@ export class Dashboard implements OnInit {
       this.chartBranch = this.renderBranchChart(r);
     });
 
-  this.movementService.getLast30Days(branchId).subscribe(r => {
+    this.movementService.getLast30Days(branchId).subscribe(r => {
+      const ordered = r.sort((a, b) =>
+        new Date(a.day).getTime() - new Date(b.day).getTime()
+      );
 
-  const ordered = r.sort((a, b) =>
-    new Date(a.day).getTime() - new Date(b.day).getTime()
-  );
-
-  this.renderMovementsChart(ordered);
-});
+      this.chartMovements = this.renderMovementsChart(ordered);
+    });
 
   }
 
   renderCategoryChart(data: any[]) {
+    const colors = this.getChartColors();
     return new Chart('chartCategory', {
       type: 'bar',
       data: {
@@ -158,13 +162,23 @@ export class Dashboard implements OnInit {
         datasets: [{
           label: 'Stock total',
           data: data.map(x => x.totalStock),
-          backgroundColor: '#ffdd00'
+          backgroundColor: colors.accent,
+          borderRadius: 10,
+          borderSkipped: false
         }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: colors.text }, grid: { display: false } },
+          y: { ticks: { color: colors.text }, grid: { color: colors.grid } }
+        }
       }
     });
   }
 
   renderBranchChart(data: any[]) {
+    const colors = this.getChartColors();
     return new Chart('chartBranch', {
       type: 'pie',
       data: {
@@ -172,13 +186,24 @@ export class Dashboard implements OnInit {
         datasets: [{
           label: 'Productos',
           data: data.map(x => x.count),
-          backgroundColor: ['#ffdd00','#00c853','#2962ff','#d50000']
+          backgroundColor: [
+            '#f6a500', '#4ed8a2', '#6f7ff7', '#e44f6a', '#a33886'
+          ],
+          borderColor: colors.grid
         }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: { color: colors.text }
+          }
+        }
       }
     });
   }
 
   renderMovementsChart(data: any[]) {
+    const colors = this.getChartColors();
     return new Chart('chartMovements', {
       type: 'line',
       data: {
@@ -186,10 +211,29 @@ export class Dashboard implements OnInit {
         datasets: [{
           label: 'Movimientos',
           data: data.map(x => x.count),
-          borderColor: '#2962ff'
+          borderColor: '#6f7ff7',
+          backgroundColor: 'rgba(111, 127, 247, 0.18)',
+          tension: 0.35,
+          fill: true
         }]
+      },
+      options: {
+        plugins: { legend: { labels: { color: colors.text } } },
+        scales: {
+          x: { ticks: { color: colors.text }, grid: { display: false } },
+          y: { ticks: { color: colors.text }, grid: { color: colors.grid } }
+        }
       }
     });
+  }
+
+  private getChartColors() {
+    const styles = getComputedStyle(document.body);
+    return {
+      text: styles.getPropertyValue('--text-primary').trim(),
+      grid: styles.getPropertyValue('--border-subtle').trim(),
+      accent: styles.getPropertyValue('--color-amber').trim(),
+    };
   }
 
 }

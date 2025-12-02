@@ -1,7 +1,7 @@
 .navbar {
   height: 64px;
-  background: linear-gradient(120deg, var(--color-midnight), var(--color-violet));
-  color: #fff;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   padding: 0 22px;
   display: flex;
   align-items: center;
@@ -27,7 +27,7 @@
 .theme-toggle {
   background: var(--bg-muted);
   border: 1px solid var(--border-subtle);
-  color: #fff;
+  color: var(--text-primary);
   width: 42px;
   height: 42px;
   border-radius: 50%;
@@ -39,9 +39,9 @@
 }
 
 .theme-toggle {
-  background: linear-gradient(135deg, var(--color-amber), var(--color-sunset));
+  background: color-mix(in srgb, var(--color-amber) 15%, transparent);
   color: #0f2545;
-  border: none;
+  border: 1px solid color-mix(in srgb, var(--color-amber) 25%, var(--border-subtle));
 }
 
 .menu-btn:hover,
@@ -53,5 +53,5 @@
 
 .user-name {
   font-weight: 600;
-  color: #f3f5ff;
+  color: var(--text-primary);
 }

@@ -22,7 +22,7 @@ mat-chip-option:hover {
 }
 
 mat-chip-option.mat-mdc-chip-selected {
-  background: linear-gradient(135deg, var(--color-violet), var(--color-sunset)) !important;
+  background: var(--color-amber) !important;
   color: #0f2545 !important;
   font-weight: 700;
   box-shadow: var(--shadow-strong);

@@ -1,7 +1,7 @@
 .sidebar {
   width: 260px;
-  background: linear-gradient(180deg, var(--color-midnight), var(--color-abyss));
-  color: #fff;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
   height: 100vh;
   overflow-y: auto;
   padding: 16px;
@@ -41,10 +41,10 @@
 }
 
 .branch-btn.active {
-  background: linear-gradient(135deg, var(--color-magenta), var(--color-amber));
+  background: color-mix(in srgb, var(--color-amber) 18%, transparent);
   color: #0f2545;
   box-shadow: var(--shadow-strong);
-  border: none;
+  border-color: color-mix(in srgb, var(--color-amber) 25%, var(--border-subtle));
 }
 
 .branch-btn:hover {

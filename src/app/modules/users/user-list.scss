@@ -17,9 +17,9 @@
   }
 
   .create-btn {
-    background: linear-gradient(135deg, var(--color-violet), var(--color-amber));
+    background: var(--color-amber);
     color: #0f2545;
-    border: none;
+    border: 1px solid color-mix(in srgb, var(--color-amber) 30%, var(--border-subtle));
     padding: 10px 14px;
     border-radius: 16px;
     cursor: pointer;

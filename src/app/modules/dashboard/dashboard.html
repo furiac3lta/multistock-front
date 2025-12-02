@@ -1,104 +1,140 @@
 
 
 
-<div class="dashboard-container">
+<div class="dashboard-shell">
+  <div class="dashboard-top">
+    <div class="hero">
+      <p class="eyebrow">Resumen general</p>
+      <h1>Dashboard</h1>
+      <p class="lead">Control rápido del inventario, actualizado reciente.</p>
 
-  <h1 class="title">Dashboard</h1>
+      <div class="hero-pills">
+        <span class="pill muted">{{ branchName }}</span>
+        <span class="pill soft">{{ totalProductos }} productos</span>
+        <span class="pill soft">{{ totalCategorias }} categorías</span>
+      </div>
+    </div>
 
-  <div class="card-grid">
+    <div class="branch-pills" *ngIf="branches.length">
+      <button
+        *ngFor="let b of branches"
+        class="branch-pill"
+        [class.active]="currentBranch === b.id"
+        (click)="changeBranch(b.id)"
+      >
+        <span class="dot" [class.live]="currentBranch === b.id"></span>
+        {{ b.name }}
+        <small *ngIf="currentBranch === b.id">Sucursal actual</small>
+      </button>
+    </div>
+  </div>
 
-    <div class="stat-card">
-      <h3>Total de Productos</h3>
+  <div class="summary-grid">
+    <div class="summary-card">
+      <span class="label">Productos</span>
       <p class="value">{{ totalProductos }}</p>
+      <span class="hint">Totales en la sucursal</span>
     </div>
 
-    <div class="stat-card">
-      <h3>Total de Categorías</h3>
+    <div class="summary-card">
+      <span class="label">Categorías</span>
       <p class="value">{{ totalCategorias }}</p>
+      <span class="hint">Organización del catálogo</span>
     </div>
 
-    <div class="stat-card">
-      <h3>Valor del Inventario</h3>
+    <div class="summary-card">
+      <span class="label">Valor inventario</span>
       <p class="value">{{ valorInventario | currency:'ARS':'symbol':'1.0-0' }}</p>
+      <span class="hint">Stock valorizado</span>
     </div>
 
-    <div class="stat-card">
-      <h3>Stock Total</h3>
+    <div class="summary-card">
+      <span class="label">Stock total</span>
       <p class="value">{{ totalStock }}</p>
+      <span class="hint">Unidades disponibles</span>
     </div>
 
-    <div class="stat-card">
-      <h3>Movimientos Hoy</h3>
+    <div class="summary-card">
+      <span class="label">Movimientos hoy</span>
       <p class="value">{{ totalMovimientosHoy }}</p>
+      <span class="hint">Ingresos y salidas</span>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Stock Bajo (≤ 5)</h2>
+        <span class="pill warning" *ngIf="stockBajo.length">{{ stockBajo.length }} alertas</span>
+      </div>
+
+      <div *ngIf="stockBajo.length === 0" class="empty">No hay productos con stock bajo</div>
+
+      <ul *ngIf="stockBajo.length > 0" class="item-list">
+        <li *ngFor="let p of stockBajo">
+          <div>
+            <p class="item-title">{{ p.name }}</p>
+            <span class="item-sub">Sucursal {{ branchName }}</span>
+          </div>
+          <span class="pill danger">Stock {{ p.stock }}</span>
+        </li>
+      </ul>
     </div>
 
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Últimos Productos</h2>
+        <span class="pill muted">Nuevos ingresos</span>
+      </div>
+
+      <ul class="item-list">
+        <li *ngFor="let p of ultimosProductos">
+          <div>
+            <p class="item-title">{{ p.name }}</p>
+            <span class="item-sub">Stock disponible: {{ p.stock }}</span>
+          </div>
+          <div class="price">{{ p.salePrice | currency:'ARS':'symbol':'1.0-0' }}</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Últimos Movimientos</h2>
+        <span class="pill muted">Ingresos y salidas</span>
+      </div>
+
+      <ul class="item-list">
+        <li *ngFor="let m of ultimosMovimientos">
+          <div>
+            <p class="item-title">{{ m.productName }}</p>
+            <span class="item-sub">{{ m.createdAt | date:'dd/MM/yy HH:mm' }}</span>
+          </div>
+          <div class="movement-meta">
+            <span class="pill" [class.success]="m.movementType === 'INCREASE'" [class.danger]="m.movementType === 'DECREASE'">
+              {{ m.movementType === 'INCREASE' ? 'Ingreso' : 'Salida' }}
+            </span>
+            <span class="pill muted">Cantidad: {{ m.quantity }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <!-- STOCK BAJO -->
-  <div class="section">
-    <h2>Stock Bajo (≤ 5)</h2>
-
-    <div *ngIf="stockBajo.length === 0" class="empty">No hay productos con stock bajo</div>
-
-    <ul *ngIf="stockBajo.length > 0">
-      <li *ngFor="let p of stockBajo">
-        {{ p.name }} — Stock: <strong>{{ p.stock }}</strong>
-      </li>
-    </ul>
-  </div>
-
-  <!-- ÚLTIMOS PRODUCTOS -->
-  <div class="section">
-    <h2>Últimos Productos</h2>
-
-    <ul>
-      <li *ngFor="let p of ultimosProductos">
-        {{ p.name }} —
-        <span>{{ p.salePrice | currency:'ARS':'symbol':'1.0-0' }}</span>
-      </li>
-    </ul>
-  </div>
-
-  <!-- ÚLTIMOS MOVIMIENTOS -->
-  <div class="section">
-    <h2>Últimos Movimientos</h2>
-
-    <ul>
-      <li *ngFor="let m of ultimosMovimientos">
-        <strong>{{ m.createdAt | date:'dd/MM HH:mm' }}</strong> —
-        {{ m.productName }}
-        <span
-          [class.in]="m.movementType === 'INCREASE'"
-          [class.out]="m.movementType === 'DECREASE'"
-        >
-          ({{ m.movementType === 'INCREASE' ? 'Ingreso' : 'Salida' }})
-        </span>
-        — Cant: {{ m.quantity }}
-      </li>
-    </ul>
-  </div>
-<!-- GRÁFICOS -->
-<div class="section">
-  <h2>Gráficos</h2>
-
-  <div class="charts-grid">
-
-    <div class="chart-card">
-      <h3>Stock por Categoría</h3>
+  <div class="charts-section">
+    <div class="panel">
+      <h2>Stock por Categoría</h2>
       <canvas id="chartCategory"></canvas>
     </div>
 
-    <div class="chart-card">
-      <h3>Productos por Sucursal</h3>
+    <div class="panel">
+      <h2>Productos por Sucursal</h2>
       <canvas id="chartBranch"></canvas>
     </div>
 
-    <div class="chart-card">
-      <h3>Movimientos últimos 30 días</h3>
+    <div class="panel">
+      <h2>Movimientos últimos 30 días</h2>
       <canvas id="chartMovements"></canvas>
     </div>
-
   </div>
-</div>
-
 </div>

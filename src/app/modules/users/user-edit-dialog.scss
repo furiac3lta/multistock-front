@@ -58,10 +58,10 @@
 
   .save {
     padding: 10px 16px;
-    background: linear-gradient(135deg, var(--color-magenta), var(--color-amber));
+    background: var(--color-amber);
     color: #0f2545;
     border-radius: var(--radius-md);
-    border: none;
+    border: 1px solid color-mix(in srgb, var(--color-amber) 30%, var(--border-subtle));
     cursor: pointer;
     font-weight: 700;
     box-shadow: var(--shadow-soft);
