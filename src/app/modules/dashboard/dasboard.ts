@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { BranchSwitcher } from '../../shared/components/brand-switcher/brand-switcher';
 
 import { ProductService } from '../../core/services/product.service';
 import { CategoryService } from '../../core/services/category.service';
@@ -15,7 +16,7 @@ import { Product } from '../../core/models/product.model';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatCardModule, CurrencyPipe, MatChipsModule],
+  imports: [CommonModule, MatCardModule, CurrencyPipe, MatChipsModule, BranchSwitcher],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss']
 })

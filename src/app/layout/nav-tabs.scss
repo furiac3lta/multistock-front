@@ -1,34 +1,58 @@
 .tabs-container {
-  background: #1e1e1e;
-  padding: 0.5rem 0;
+  background: #0f172a;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .tabs-list {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  margin: 0;
+  gap: 10px;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
+  max-width: 1280px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tabs-list::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tabs-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
 }
 
 .tab-item {
-  color: #ccc;
+  color: #cbd5e1;
   padding: 10px 16px;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s ease;
-
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .tab-item.active {
-  color: #ffea00;
-  border-color: #ffea00;
+  color: #0f172a;
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+  border-color: transparent;
+  box-shadow: 0 12px 20px rgba(245, 158, 11, 0.25);
+  font-weight: 700;
 }
 
 .tab-item:hover {
-  color: white;
+  color: #f3f4f6;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 600px) {
+  .tab-item {
+    padding: 10px 12px;
+  }
 }

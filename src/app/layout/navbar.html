@@ -1,18 +1,29 @@
 <nav class="navbar">
+  <div class="navbar-content">
+    <div class="brand">
+      <div class="brand-mark">
+        <span class="logo-dot"></span>
+        <div class="brand-text">
+          <span class="brand-title">Stock App</span>
+          <span class="brand-subtitle">Gestión inteligente</span>
+        </div>
+      </div>
+    </div>
 
-  <!-- botón del sidebar -->
-  <div class="navbar-title">
-    STOCK APP
+    <div class="navbar-center">
+      <app-branch-switcher class="branch-inline"></app-branch-switcher>
+    </div>
+
+    <div class="navbar-actions">
+      <div class="user-pill">
+        <mat-icon>person</mat-icon>
+        <span class="user-name">{{ usuario.nombre }}</span>
+      </div>
+
+      <button class="logout-btn" type="button" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Salir</span>
+      </button>
+    </div>
   </div>
- <app-branch-switcher></app-branch-switcher>
-  <!-- Nombre -->
-  <div class="navbar-title">
-    {{ usuario.nombre }}
-  </div>
-
-  <!-- logout a la derecha -->
-  <button class="logout-btn" (click)="logout()">
-    <mat-icon>logout</mat-icon>
-  </button>
-
 </nav>
