@@ -72,7 +72,31 @@ th.mat-header-cell {
 .actions {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 10px;
+  min-width: 184px;
+  text-align: center;
+}
+
+.actions-header {
+  text-align: center;
+  min-width: 184px;
+}
+
+.actions button {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-muted);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+.actions button:hover,
+.actions button:focus-visible {
+  border-color: color-mix(in srgb, var(--color-amber) 45%, var(--border-subtle));
+  background: color-mix(in srgb, var(--color-amber) 12%, var(--bg-muted));
 }
 
 .pill {
