@@ -15,6 +15,11 @@
     </div>
 
     <div class="navbar-actions">
+      <button class="theme-btn" type="button" (click)="toggleTheme()" [attr.aria-label]="theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'">
+        <mat-icon>{{ theme === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        <span>{{ theme === 'dark' ? 'Claro' : 'Oscuro' }}</span>
+      </button>
+
       <div class="user-pill">
         <mat-icon>person</mat-icon>
         <span class="user-name">{{ usuario.nombre }}</span>

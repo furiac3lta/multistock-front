@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 .header {
@@ -18,7 +18,7 @@
     margin: 0;
     font-size: 26px;
     font-weight: 700;
-    color: #f8fafc;
+    color: var(--text-strong);
   }
 
   .eyebrow {
@@ -36,12 +36,16 @@
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+}
 
-  .btn-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
+.action-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+  border-radius: 14px;
+  background: var(--surface-button);
+  border: 1px solid var(--surface-border);
 }
 
 .btn-add {
@@ -51,17 +55,15 @@
   padding: 12px 18px;
   border: none;
   border-radius: 999px;
-  background: linear-gradient(135deg, #facc15, #f97316);
+  background: linear-gradient(135deg, var(--brand-gradient-start), var(--brand-gradient-end));
   color: #111827;
   font-weight: 700;
   letter-spacing: 0.01em;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.24);
+  box-shadow: 0 8px 20px var(--brand-glow);
   transition: transform 0.15s ease, box-shadow 0.2s ease;
 
-  mat-icon {
-    font-size: 20px;
-  }
+  mat-icon { font-size: 20px; }
 
   &:hover {
     transform: translateY(-1px);
@@ -72,39 +74,37 @@
 .surface-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 14px;
+  gap: 6px;
+  padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  color: #e5e7eb;
+  border: 1px solid var(--surface-button-border);
+  background: var(--surface-button);
+  color: var(--text-primary);
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 
-  mat-icon {
-    font-size: 20px;
-  }
+  mat-icon { font-size: 20px; }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.22);
+    background: var(--surface-button-hover);
+    border-color: var(--surface-border);
     transform: translateY(-1px);
   }
 
   &.warn {
-    color: #fef3c7;
-    border-color: rgba(250, 204, 21, 0.35);
+    color: #f59e0b;
+    border-color: rgba(250, 204, 21, 0.45);
     background: rgba(250, 204, 21, 0.08);
   }
 }
 
 .table-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
   border-radius: 18px;
   padding: 6px 0;
-  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--shadow-elevated);
   backdrop-filter: blur(4px);
 }
 
@@ -113,28 +113,28 @@ table.mat-mdc-table {
   background: transparent;
 
   .mdc-data-table__header-row {
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--table-header-bg);
   }
 
   .mdc-data-table__header-cell {
-    color: #cbd5f5;
+    color: var(--text-muted);
     font-weight: 700;
     font-size: 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--table-divider);
   }
 
   .mdc-data-table__row {
-    color: #f8fafc;
+    color: var(--text-primary);
     transition: background 0.2s ease;
   }
 
   .mdc-data-table__cell {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--table-divider);
     font-size: 14px;
   }
 
   .mdc-data-table__row:hover {
-    background: rgba(59, 130, 246, 0.12);
+    background: var(--table-row-hover);
   }
 }
 
@@ -142,27 +142,23 @@ table.mat-mdc-table {
   display: flex;
   gap: 6px;
 
-  button.mat-icon-button {
-    color: #f8fafc;
-  }
+  button.mat-icon-button { color: var(--text-primary); }
 }
 
 @media (max-width: 900px) {
-  .header {
-    align-items: flex-start;
-  }
+  .header { align-items: flex-start; }
 
   .cta-group {
     width: 100%;
     justify-content: space-between;
+    gap: 10px;
 
-    .btn-row {
-      width: 100%;
-    }
-
-    .surface-btn {
-      flex: 1;
-      justify-content: center;
-    }
+    .action-icons { flex: 1; justify-content: space-between; }
+    .btn-add { flex: 1; justify-content: center; }
   }
+}
+
+@media (max-width: 640px) {
+  .action-icons { width: 100%; justify-content: space-between; }
+  .surface-btn { flex: 1; justify-content: center; }
 }

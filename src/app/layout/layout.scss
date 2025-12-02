@@ -7,9 +7,8 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  background: radial-gradient(circle at 10% 20%, rgba(250, 204, 21, 0.1), transparent 28%),
-              radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.08), transparent 22%),
-              #0b1120;
+  background: var(--layout-background);
+  color: var(--text-primary);
 }
 
 /* Navbar y footer fijos */
@@ -21,12 +20,12 @@
 
 .footer-fixed {
   height: 52px;
-  background: #0f172a;
-  color: #facc15;
+  background: var(--footer-bg);
+  color: var(--footer-text);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--surface-border);
 }
 
 .main-area {
@@ -41,51 +40,14 @@
 }
 
 /* ============================================
-   SIDEBAR (Angular Material)
-============================================ */
-mat-sidenav {
-  width: 260px !important;
-  background: #0f172a !important;
-  color: #e5e7eb;
-  border-radius: 0 !important;
-  padding: 20px 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.logo {
-  color: #facc15;
-  font-size: 22px;
-  font-weight: bold;
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-
-mat-nav-list a {
-  color: #cbd5e1 !important;
-  font-size: 16px;
-}
-
-mat-nav-list a:hover {
-  background: rgba(255, 221, 0, 0.08) !important;
-  color: #facc15 !important;
-}
-
-mat-icon {
-  color: #facc15;
-  margin-right: 12px;
-}
-
-/* ============================================
    CONTENIDO (solo aquí hay scroll)
 ============================================ */
 .content-scroll {
   flex: 1;
   overflow-y: auto;
   padding: clamp(16px, 3vw, 36px);
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.85)),
-              radial-gradient(circle at 20% 20%, rgba(250, 204, 21, 0.09), transparent 30%),
-              radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.08), transparent 28%),
-              #0b1120;
+  background: var(--content-background);
+  color: var(--text-primary);
 }
 
 .content-scroll ::ng-deep router-outlet + * {

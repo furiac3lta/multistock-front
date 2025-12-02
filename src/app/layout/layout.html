@@ -1,13 +1,10 @@
-<div class="layout">
+<div class="layout" [class.theme-dark]="theme === 'dark'" [class.theme-light]="theme === 'light'">
 
   <!-- NAVBAR FIJO (FUERA DEL SCROLL) -->
   <app-navbar class="navbar-fixed"></app-navbar>
 
   <!-- HEADER + SWITCHER (PUEDEN IR JUNTOS) -->
-  <div class="top-controls">
-   
-  
-  </div>
+  <div class="top-controls"></div>
 
   <!-- TABS DE NAVEGACIÓN (DEBEN ESTAR DENTRO DEL LAYOUT) -->
   <app-tabs></app-tabs>
