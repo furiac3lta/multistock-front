@@ -9,7 +9,8 @@ import { BranchService } from '../../core/services/branch.service';
   selector: 'app-user-create-dialog',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './user-create-dialog.html'
+  templateUrl: './user-create-dialog.html',
+  styleUrls: ['./user-create-dialog.scss']
 })
 export class UserCreateDialog {
 

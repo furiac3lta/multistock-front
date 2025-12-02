@@ -13,17 +13,16 @@ mat-chip-option {
   background: var(--bg-muted) !important;
   color: var(--text-secondary) !important;
   border: 1px solid var(--border-subtle) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 mat-chip-option:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-soft);
+  background: color-mix(in srgb, var(--color-amber) 8%, var(--bg-muted)) !important;
+  border-color: color-mix(in srgb, var(--color-amber) 25%, var(--border-subtle)) !important;
 }
 
 mat-chip-option.mat-mdc-chip-selected {
   background: var(--color-amber) !important;
   color: #0f2545 !important;
   font-weight: 700;
-  box-shadow: var(--shadow-strong);
 }

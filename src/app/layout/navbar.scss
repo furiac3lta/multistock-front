@@ -6,14 +6,39 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: var(--shadow-soft);
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.navbar-title {
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-amber);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-amber) 22%, transparent);
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-title {
   font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.4px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.brand-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.1px;
 }
 
 .nav-actions {
@@ -34,21 +59,20 @@
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .theme-toggle {
-  background: color-mix(in srgb, var(--color-amber) 15%, transparent);
+  background: color-mix(in srgb, var(--color-amber) 16%, var(--bg-muted));
   color: #0f2545;
-  border: 1px solid color-mix(in srgb, var(--color-amber) 25%, var(--border-subtle));
+  border: 1px solid color-mix(in srgb, var(--color-amber) 32%, var(--border-subtle));
 }
 
 .menu-btn:hover,
 .logout-btn:hover,
 .theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-strong);
+  background: color-mix(in srgb, var(--color-amber) 12%, var(--bg-muted));
+  border-color: color-mix(in srgb, var(--color-amber) 40%, var(--border-subtle));
 }
 
 .user-name {
