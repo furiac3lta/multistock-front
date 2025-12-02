@@ -9,6 +9,7 @@
   align-items: center;
   margin-bottom: 20px;
   gap: 12px;
+  flex-wrap: wrap;
 
   h2 {
     font-size: 24px;
@@ -35,6 +36,20 @@
 
 table {
   width: 100%;
+  border-collapse: collapse;
+}
+
+.table-shell {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.table-scroll {
+  max-height: 60vh;
+  overflow: auto;
 }
 
 table th {
@@ -53,6 +68,7 @@ table td {
 .actions {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .action-btn {
@@ -86,4 +102,24 @@ table td {
 .inactive {
   color: var(--color-coral);
   font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .users-container {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .create-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .table-scroll table {
+    min-width: 720px;
+  }
 }

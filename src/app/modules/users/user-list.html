@@ -5,46 +5,50 @@
         <button class="create-btn" (click)="openCreate()">+ Crear usuario</button>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Usuario</th>
-                <th>Nombre</th>
-                <th>Rol</th>
-                <th>Sucursal</th>
-                <th>Activo</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
+    <div class="table-shell">
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Rol</th>
+                        <th>Sucursal</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
 
-        <tbody>
-            <tr *ngFor="let u of users">
-                <td>{{ u.username }}</td>
-                <td>{{ u.fullName }}</td>
-                <td>{{ u.roles[0] }}</td>
-                <td>{{ u.branchName }}</td>
+                <tbody>
+                    <tr *ngFor="let u of users">
+                        <td>{{ u.username }}</td>
+                        <td>{{ u.fullName }}</td>
+                        <td>{{ u.roles[0] }}</td>
+                        <td>{{ u.branchName }}</td>
 
-                <td>
-                    <span [class.active]="u.active" [class.inactive]="!u.active">
-                        {{ u.active ? "Sí" : "No" }}
-                    </span>
-                </td>
+                        <td>
+                            <span [class.active]="u.active" [class.inactive]="!u.active">
+                                {{ u.active ? "Sí" : "No" }}
+                            </span>
+                        </td>
 
-                <td class="actions">
-                    <button class="action-btn" (click)="openEdit(u)">Editar</button>
+                        <td class="actions">
+                            <button class="action-btn" (click)="openEdit(u)">Editar</button>
 
-                    <button class="action-btn" (click)="openPassword(u)">Cambiar contraseña</button>
+                            <button class="action-btn" (click)="openPassword(u)">Cambiar contraseña</button>
 
-                    <button class="action-btn" (click)="openRole(u)">Rol</button>
+                            <button class="action-btn" (click)="openRole(u)">Rol</button>
 
-                    <button class="action-btn deactivate-btn" (click)="toggle(u)">
-                        {{ u.active ? "Desactivar" : "Activar" }}
-                    </button>
-                </td>
+                            <button class="action-btn deactivate-btn" (click)="toggle(u)">
+                                {{ u.active ? "Desactivar" : "Activar" }}
+                            </button>
+                        </td>
 
 
-            </tr>
-        </tbody>
-    </table>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </div>

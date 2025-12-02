@@ -63,6 +63,7 @@ body.theme-dark {
 body {
   margin: 0;
   min-height: 100vh;
+  overflow: hidden;
   --bg-body: #0e1323;
   --bg-surface: #11182e;
   --bg-elevated: #161f35;
