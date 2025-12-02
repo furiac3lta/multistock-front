@@ -5,32 +5,37 @@
 }
 
 .label {
-  color: #aaa;
+  color: var(--text-muted);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .switcher-row {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   align-items: center;
 }
 
 .switcher-item {
   font-size: 15px;
-  color: #ddd;
+  color: var(--text-secondary);
   cursor: pointer;
-  padding-bottom: 3px;
+  padding-bottom: 4px;
   border-bottom: 2px solid transparent;
-  transition: 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .switcher-item:hover {
-  color: #fff;
+  color: var(--color-amber);
+  transform: translateY(-1px);
 }
 
 .switcher-item.active {
-  color: #ffe600; /* Amarillo patito */
-  border-bottom: 2px solid #ffe600;
-  font-weight: 600;
+  color: #0f2545;
+  border-bottom: 2px solid var(--color-amber);
+  font-weight: 700;
+  background: linear-gradient(120deg, var(--color-amber), var(--color-sunset));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

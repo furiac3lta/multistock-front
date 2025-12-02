@@ -1,11 +1,7 @@
-
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+// Material baseline so components inherit typography/density while colors are
+// driven by the custom CSS variables declared below.
 html {
   @include mat.theme((
     color: (
@@ -17,361 +13,292 @@ html {
   ));
 }
 
+// =============================
+// Palette & design tokens
+// =============================
+:root {
+  --color-midnight: #0f2545; // deep navy
+  --color-abyss: #253a70;    // blue indigo
+  --color-indigo: #444e95;   // muted indigo
+  --color-violet: #733c9b;   // purple
+  --color-magenta: #a33886;  // magenta
+  --color-coral: #e44f6a;    // coral/red
+  --color-sunset: #f3773b;   // orange
+  --color-amber: #f6a500;    // amber
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-strong: 0 20px 45px rgba(0, 0, 0, 0.18);
+
+  --status-success: #4ed8a2;
+  --status-danger: #ff6b6b;
+}
+
+body.theme-light {
+  --bg-body: linear-gradient(135deg, rgba(15, 37, 69, 0.05), rgba(244, 119, 59, 0.08)), #f7f8ff;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f9f4ff;
+  --bg-muted: #eef1fb;
+  --text-primary: #0f2545;
+  --text-secondary: #3c486b;
+  --text-muted: #6e7796;
+  --border-subtle: rgba(15, 37, 69, 0.1);
+  --overlay: rgba(15, 37, 69, 0.55);
+}
+
+body.theme-dark {
+  --bg-body: radial-gradient(circle at 20% 20%, rgba(228, 79, 106, 0.12), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(115, 60, 155, 0.12), transparent 32%),
+    linear-gradient(180deg, #0f2545, #0b1a34);
+  --bg-surface: #12172a;
+  --bg-elevated: #182143;
+  --bg-muted: rgba(255, 255, 255, 0.05);
+  --text-primary: #eef2ff;
+  --text-secondary: #c7cbe2;
+  --text-muted: #9aa3c2;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --overlay: rgba(0, 0, 0, 0.55);
+}
+
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
+  margin: 0;
+  min-height: 100vh;
+  --bg-body: linear-gradient(180deg, #0f2545, #0b1a34);
+  --bg-surface: #12172a;
+  --bg-elevated: #182143;
+  --bg-muted: rgba(255, 255, 255, 0.05);
+  --text-primary: #eef2ff;
+  --text-secondary: #c7cbe2;
+  --text-muted: #9aa3c2;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --overlay: rgba(0, 0, 0, 0.55);
+  background: var(--bg-body);
+  color: var(--text-primary);
+  font-family: 'Inter', Roboto, 'Helvetica Neue', sans-serif;
+  transition: background 0.35s ease, color 0.35s ease;
+}
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
+* {
+  box-sizing: border-box;
+}
 
-  // Reset the user agent margin.
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
   margin: 0;
 }
-/* ===============================
-   THEME PRINCIPAL ANGULAR MATERIAL
-   =============================== */
 
-
-
-html {
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+p, span, label {
+  color: var(--text-secondary);
 }
 
-body {
-  color-scheme: light;
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-  margin: 0;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-html, body {
-  height: 100%;
+// =============================
+// Global surfaces & cards
+// =============================
+.mat-mdc-card, .card, mat-card {
+  background: var(--bg-surface) !important;
+  color: var(--text-primary);
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ===============================
-   BOTÓN "NUEVA CATEGORÍA"
-   =============================== */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
-
-  h2 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 600;
-  }
+.mat-mdc-card:hover, .card:hover, mat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-strong);
 }
 
-.btn-add {
-  display: flex;
+.section-shell {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-soft);
+}
+
+// =============================
+// Buttons & CTAs
+// =============================
+button,
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mdc-button {
+  font-weight: 700;
+  border-radius: var(--radius-md);
+}
+
+.btn-add,
+button.mat-mdc-raised-button,
+button[mat-raised-button] {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #ffdd00;
-  color: #000;
+  background: linear-gradient(135deg, var(--color-violet), var(--color-sunset));
+  color: #fff !important;
   border: none;
   padding: 10px 18px;
-  border-radius: 30px;
+  border-radius: 28px;
   font-size: 15px;
-  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-  transition: 0.2s;
-
-  mat-icon {
-    font-size: 20px;
-  }
+  box-shadow: 0 10px 25px rgba(228, 79, 106, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-add:hover {
-  background: #ffe64d;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.22);
-  transform: translateY(-1px);
+.btn-add:hover,
+button.mat-mdc-raised-button:hover,
+button[mat-raised-button]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(243, 119, 59, 0.35);
 }
 
-/* ===============================
-   DIALOG — ESTILO MODERNO
-   =============================== */
-
-.mat-mdc-dialog-container .mdc-dialog__surface {
-  border-radius: 20px !important;
-  padding: 20px !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.18) !important;
-}
-
-/* título */
-.mat-mdc-dialog-title {
-  font-size: 22px !important;
-  font-weight: 600 !important;
-  text-align: center !important;
-  margin-bottom: 5px !important;
-}
-
-/* contenido */
-.mat-mdc-dialog-content {
-  padding-top: 10px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 18px !important;
-}
-
-/* ===============================
-   FORM FIELDS (OUTLINE MODERNOS)
-   =============================== */
-
-.mat-mdc-form-field {
-  width: 100% !important;
-}
-
-.mat-mdc-text-field-wrapper {
-  background: #f5f5f5 !important;
-  border-radius: 14px !important;
-}
-
-.mdc-notched-outline {
-  border-radius: 14px !important;
-}
-
-.mdc-notched-outline__leading,
-.mdc-notched-outline__notch,
-.mdc-notched-outline__trailing {
-  border-color: #ccc !important;
-}
-
-/* foco en amarillo patito */
-.mdc-text-field--focused .mdc-notched-outline .mdc-notched-outline__leading,
-.mdc-text-field--focused .mdc-notched-outline .mdc-notched-outline__notch,
-.mdc-text-field--focused .mdc-notched-outline .mdc-notched-outline__trailing {
-  border-color: #ffdd00 !important;
-}
-
-/* labels */
-.mdc-floating-label {
-  color: #666 !important;
-  font-weight: 500 !important;
-}
-
-/* textos */
-.mat-mdc-input-element, .mat-mdc-select-trigger {
-  font-size: 15px !important;
-  font-weight: 500 !important;
-  color: #333 !important;
-}
-
-/* ===============================
-   SLIDE TOGGLE
-   =============================== */
-.mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked .mdc-switch__track {
-  background-color: rgba(255, 221, 0, 0.4) !important;
-}
-
-.mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked .mdc-switch__thumb {
-  background: #ffdd00 !important;
-}
-
-/* ===============================
-   BOTONES DEL DIALOG
-   =============================== */
-
-.mat-mdc-dialog-actions {
-  display: flex !important;
-  justify-content: space-between !important;
-  padding-top: 15px !important;
-}
-
-button.mdc-button {
-  font-weight: 600 !important;
-}
-
-button.mat-mdc-raised-button {
-  background: #ffdd00 !important;
-  color: #000 !important;
-  border-radius: 25px !important;
-  padding: 4px 22px !important;
-  font-weight: 600 !important;
-}
-/* =======================================================
-   DIALOGO PREMIUM – STOCKAPP (Angular Material 20 / MDC)
-   ======================================================= */
-
-/* SUPERFICIE DEL DIALOG */
-.mat-mdc-dialog-container .mdc-dialog__surface {
-  border-radius: 26px !important;
-  padding: 26px !important;
-  background: #ffffff !important;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.22) !important;
-}
-
-/* TITULO */
-.mat-mdc-dialog-title {
-  font-size: 24px !important;
+button[mat-button] {
+  color: var(--text-muted) !important;
   font-weight: 700 !important;
-  text-align: center !important;
-  margin-bottom: 15px !important;
-  letter-spacing: -0.3px;
 }
 
-/* CONTENIDO */
-.mat-mdc-dialog-content {
-  padding: 0 !important;
-  margin-top: 10px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 22px !important;
-}
-
-/* =======================================================
-   CAMPOS (INPUTS)
-   ======================================================= */
-
-/* Wrapper general */
+// =============================
+// Forms & inputs
+// =============================
 .mat-mdc-form-field {
   width: 100%;
 }
 
-/* Caja del input */
 .mat-mdc-text-field-wrapper {
-  background: #f7f7f7 !important;
-  border-radius: 14px !important;
-  padding: 4px 14px !important;
-  transition: background 0.2s ease-in-out, box-shadow 0.25s ease;
+  background: var(--bg-muted) !important;
+  border-radius: var(--radius-md) !important;
+  transition: box-shadow 0.2s ease, background 0.2s ease;
 }
 
-/* Bordes outline */
 .mdc-notched-outline__leading,
 .mdc-notched-outline__notch,
 .mdc-notched-outline__trailing {
-  border-color: #d4d4d4 !important;
-  border-width: 1.5px !important;
+  border-color: var(--border-subtle) !important;
 }
 
-/* ON FOCUS – Amarillo patito y sombra */
 .mdc-text-field--focused .mdc-notched-outline__leading,
 .mdc-text-field--focused .mdc-notched-outline__notch,
 .mdc-text-field--focused .mdc-notched-outline__trailing {
-  border-color: #ffdd00 !important;
+  border-color: var(--color-amber) !important;
 }
 
 .mdc-text-field--focused .mat-mdc-text-field-wrapper {
-  background: #fffceb !important;
-  box-shadow: 0 0 0 3px rgba(255,221,0,0.35) !important;
+  background: color-mix(in srgb, var(--color-amber) 14%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-amber) 35%, transparent) !important;
 }
 
-/* Label flotante */
 .mdc-floating-label {
-  color: #666 !important;
-  font-weight: 500 !important;
-  font-size: 14px !important;
+  color: var(--text-muted) !important;
+  font-weight: 600 !important;
 }
 
-/* Texto del input */
 .mat-mdc-input-element,
-.mat-mdc-select-value-text {
-  font-size: 16px !important;
-  color: #222 !important;
-  font-weight: 500 !important;
+.mat-mdc-select-trigger {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
 }
-
-/* Select icon */
-.mat-mdc-select-arrow {
-  color: #555 !important;
-}
-
-/* =======================================================
-   SLIDE TOGGLE
-   ======================================================= */
 
 .mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked .mdc-switch__track {
-  background-color: rgba(255,221,0,0.5) !important;
-}
-.mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked .mdc-switch__thumb {
-  background: #ffdd00 !important;
+  background: color-mix(in srgb, var(--color-sunset) 40%, transparent) !important;
 }
 
-/* =======================================================
-   BOTONES
-   ======================================================= */
+.mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked .mdc-switch__thumb {
+  background: var(--color-sunset) !important;
+}
+
+// =============================
+// Tables
+// =============================
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-subtle);
+}
+
+table thead {
+  background: color-mix(in srgb, var(--color-abyss) 10%, transparent);
+  color: var(--text-primary);
+}
+
+table th, table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+table tbody tr:hover {
+  background: color-mix(in srgb, var(--color-abyss) 6%, transparent);
+}
+
+// =============================
+// Dialogs / Modals
+// =============================
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 24px !important;
+  padding: 20px !important;
+  background: var(--bg-surface) !important;
+  box-shadow: var(--shadow-strong) !important;
+  border: 1px solid var(--border-subtle);
+}
+
+.mat-mdc-dialog-title {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  margin-bottom: 12px !important;
+  color: var(--text-primary);
+}
+
+.mat-mdc-dialog-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+  color: var(--text-secondary);
+}
 
 .mat-mdc-dialog-actions {
-  margin-top: 25px !important;
   display: flex !important;
   justify-content: space-between !important;
-  padding: 0 !important;
+  padding-top: 16px !important;
 }
 
-/* Cancelar */
-button[mat-button] {
-  color: #666 !important;
-  font-weight: 600 !important;
-  font-size: 15px !important;
+// =============================
+// Chips / tags
+// =============================
+.mat-mdc-standard-chip.mdc-evolution-chip--selected,
+.mat-mdc-chip.mat-mdc-chip-selected {
+  background: linear-gradient(135deg, var(--color-magenta), var(--color-amber)) !important;
+  color: #0f2545 !important;
+  font-weight: 700;
 }
 
-/* Guardar */
-button[mat-raised-button] {
-  background: #ffdd00 !important;
-  color: #000 !important;
-  font-weight: 700 !important;
-  border-radius: 30px !important;
-  padding: 8px 26px !important;
-  font-size: 15px !important;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.18) !important;
-  transition: 0.2s !important;
-}
+// =============================
+// Utility classes
+// =============================
+.status-in { color: var(--status-success); font-weight: 700; }
+.status-out { color: var(--color-coral); font-weight: 700; }
 
-button[mat-raised-button]:hover {
-  background: #ffe64d !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25) !important;
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .mat-mdc-dialog-container .mdc-dialog__surface {
-    padding: 22px !important;
-  }
-  .mat-mdc-dialog-title {
-    font-size: 20px !important;
-  }
-}
 .global-branch-container {
   padding: 15px 20px;
-  background: #f7f7f7;
-  border-bottom: 1px solid #ddd;
+  background: var(--bg-muted);
+  border-bottom: 1px solid var(--border-subtle);
   position: sticky;
-  top: 60px;          // la altura del navbar
+  top: 60px;
   z-index: 10;
 }
 
+.snackbar-success { background: #00c853 !important; color: white !important; }
+.snackbar-error { background: #d50000 !important; color: white !important; }
+.snackbar-info { background: #2962ff !important; color: white !important; }
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.snackbar-success {
-  background: #00c853 !important; /* verde */
-  color: white !important;
-}
-
-.snackbar-error {
-  background: #d50000 !important; /* rojo */
-  color: white !important;
-}
-
-.snackbar-info {
-  background: #2962ff !important; /* azul */
-  color: white !important;
-}

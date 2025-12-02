@@ -4,12 +4,5 @@
   margin-bottom: 20px;
 }
 
-.in {
-  color: green;
-  font-weight: bold;
-}
-
-.out {
-  color: red;
-  font-weight: bold;
-}
+.in { color: var(--status-success); font-weight: bold; }
+.out { color: var(--color-coral); font-weight: bold; }

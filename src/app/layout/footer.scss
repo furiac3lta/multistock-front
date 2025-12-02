@@ -1,14 +1,15 @@
-
-/* ESTE ES EL TRUCO */
 .footer {
-  height: 50px;
-  background: #000;
-  color: #ffdd00;
+  height: 56px;
+  background: linear-gradient(120deg, var(--color-sunset), var(--color-amber));
+  color: #0f2545;
   display: flex;
-  justify-content: center;   /* centra horizontal */
-  align-items: center;       /* centra vertical */
+  justify-content: center;
+  align-items: center;
   font-size: 14px;
   text-align: center;
   width: 100%;
-  padding: 0 10px;
+  padding: 0 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: var(--shadow-soft);
 }

@@ -2,35 +2,39 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 10px 0;
+  padding: 12px 0;
 }
 
 .section-title {
   font-size: 14px;
-  font-weight: 600;
-  color: #bbb;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .text-row {
   display: flex;
   gap: 18px;
+  flex-wrap: wrap;
 }
 
 .text-item {
   font-size: 15px;
-  color: #ddd;
+  color: var(--text-secondary);
   cursor: pointer;
   padding-bottom: 4px;
   transition: 0.2s ease;
   border-bottom: 2px solid transparent;
+  position: relative;
 }
 
 .text-item:hover {
-  color: #fff;
+  color: var(--color-amber);
 }
 
 .text-item.active {
-  color: #ffe600;             /* Amarillo patito */
-  border-bottom: 2px solid #ffe600;
-  font-weight: 600;
+  color: var(--color-sunset);
+  border-bottom: 2px solid var(--color-sunset);
+  font-weight: 700;
 }

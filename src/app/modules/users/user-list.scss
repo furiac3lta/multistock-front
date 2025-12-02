@@ -1,5 +1,6 @@
 .users-container {
-  padding: 20px;
+  padding: 24px;
+  background: var(--bg-body);
 }
 
 .header {
@@ -7,46 +8,46 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  gap: 12px;
 
   h2 {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
   }
 
   .create-btn {
-    background: #2e7d32;
-    color: white;
+    background: linear-gradient(135deg, var(--color-violet), var(--color-amber));
+    color: #0f2545;
     border: none;
     padding: 10px 14px;
-    border-radius: 6px;
+    border-radius: 16px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
+    box-shadow: var(--shadow-soft);
 
     &:hover {
-      background: #256628;
+      box-shadow: var(--shadow-strong);
+      transform: translateY(-2px);
     }
   }
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
-  background: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
 
-  th {
-    background: #f5f5f5;
-    text-align: left;
-    padding: 12px;
-    font-weight: 600;
-  }
+table th {
+  background: color-mix(in srgb, var(--color-abyss) 10%, transparent);
+  text-align: left;
+  padding: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
 
-  td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-  }
+table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .actions {
@@ -55,33 +56,34 @@ table {
 }
 
 .action-btn {
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
   border: none;
-  background: #1976d2;
-  color: white;
+  background: var(--color-abyss);
+  color: #fff;
   cursor: pointer;
   font-size: 13px;
+  font-weight: 700;
 
   &:hover {
-    background: #115293;
+    background: var(--color-violet);
   }
 }
 
 .deactivate-btn {
-  background: #c62828;
+  background: var(--color-coral);
 
   &:hover {
-    background: #8e0000;
+    background: var(--color-sunset);
   }
 }
 
 .active {
-  color: #2e7d32;
-  font-weight: 600;
+  color: var(--status-success);
+  font-weight: 700;
 }
 
 .inactive {
-  color: #c62828;
-  font-weight: 600;
+  color: var(--color-coral);
+  font-weight: 700;
 }

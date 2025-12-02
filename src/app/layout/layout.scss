@@ -1,121 +1,44 @@
-/* ============================================
-   LAYOUT GENERAL
-============================================ */
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden; /* evita scroll global */
+  min-height: 100vh;
+  background: var(--bg-body);
 }
 
-/* Navbar fijo */
 .navbar-fixed {
-  height: 60px;
+  height: 64px;
   flex-shrink: 0;
   z-index: 10;
 }
 
-/* Footer fijo */
 .footer-fixed {
-  height: 50px;
+  height: 56px;
   flex-shrink: 0;
   z-index: 10;
-  background: #000;
-  color: #ffdd00;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* Zona del medio (sidebar + contenido) */
 .main-area {
   flex: 1;
   display: flex;
   overflow: hidden;
 }
 
-/* Wrapper del sidenav */
 .sidenav-wrapper {
   flex: 1;
-  min-height: 0; /* habilita scroll interno */
+  min-height: 0;
 }
 
-/* ============================================
-   SIDEBAR (Angular Material)
-============================================ */
-mat-sidenav {
-  width: 260px !important;
-  background: #111 !important;
-  color: #fff;
-  border-radius: 0 !important;
-  padding: 20px 0;
-}
-
-.logo {
-  color: #ffdd00;
-  font-size: 22px;
-  font-weight: bold;
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-
-mat-nav-list a {
-  color: #ccc !important;
-  font-size: 16px;
-}
-
-mat-nav-list a:hover {
-  background: #222 !important;
-  color: #ffdd00 !important;
-}
-
-mat-icon {
-  color: #ffdd00;
-  margin-right: 12px;
-}
-
-/* ============================================
-   CONTENIDO (solo aquí hay scroll)
-============================================ */
 .content-scroll {
+  flex: 1;
   overflow-y: auto;
-  background: #f5f5f5;
-  padding: 30px 40px;
+  background: var(--bg-body);
+  padding: 32px 40px 48px;
+  backdrop-filter: blur(6px);
 }
-span{
-    color: #ffdd00 !important;
-}
-/* Ocupa toda la pantalla */
+
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
-}
-
-/* NAVBAR FIJO */
-.navbar-fixed {
-  height: 60px;
-  flex-shrink: 0;
-  z-index: 5;
-}
-
-/* FOOTER FIJO */
-.footer-fixed {
-  height: 50px;
-  flex-shrink: 0;
-  z-index: 5;
-  background: #000;
-  color: #ffdd00;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* SOLO EL CONTENIDO SCROLLEA */
-.content-scroll {
-  flex: 1;
-  overflow-y: auto;
-  background: #f5f5f5;
-  padding: 30px 40px;
 }

@@ -1,7 +1,8 @@
 h2 {
   margin-bottom: 20px;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 table {
@@ -10,27 +11,21 @@ table {
 }
 
 .mat-header-cell {
-  font-weight: 600;
-  background: #f2f2f2;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--color-abyss) 10%, transparent);
+  color: var(--text-primary);
 }
 
 .mat-row:hover {
-  background: #fafafa;
+  background: color-mix(in srgb, var(--color-abyss) 6%, transparent);
 }
 
 td, th {
   padding: 12px;
 }
 
-.in {
-  color: #1b8a08;
-  font-weight: bold;
-}
-
-.out {
-  color: #c62828;
-  font-weight: bold;
-}
+.in { color: var(--status-success); font-weight: bold; }
+.out { color: var(--color-coral); font-weight: bold; }
 
 .filters {
   display: flex;
@@ -44,9 +39,10 @@ td, th {
 }
 
 .branch-tag {
-  background: #222;
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 4px;
+  background: linear-gradient(135deg, var(--color-violet), var(--color-amber));
+  color: #0f2545;
+  padding: 4px 10px;
+  border-radius: 12px;
   font-size: 12px;
+  font-weight: 700;
 }
