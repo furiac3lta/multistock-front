@@ -1,18 +1,17 @@
 <nav class="navbar">
+  <div class="navbar-title">STOCK APP</div>
 
-  <!-- botón del sidebar -->
-  <div class="navbar-title">
-    STOCK APP
+  <app-branch-switcher></app-branch-switcher>
+
+  <div class="nav-actions">
+    <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="theme === 'dark' ? 'Activar tema claro' : 'Activar tema oscuro'">
+      <mat-icon>{{ theme === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+
+    <span class="user-name">{{ usuario.nombre }}</span>
+
+    <button class="logout-btn" (click)="logout()" aria-label="Cerrar sesión">
+      <mat-icon>logout</mat-icon>
+    </button>
   </div>
- <app-branch-switcher></app-branch-switcher>
-  <!-- Nombre -->
-  <div class="navbar-title">
-    {{ usuario.nombre }}
-  </div>
-
-  <!-- logout a la derecha -->
-  <button class="logout-btn" (click)="logout()">
-    <mat-icon>logout</mat-icon>
-  </button>
-
 </nav>
