@@ -25,10 +25,14 @@
       <ng-container matColumnDef="movementType">
         <th mat-header-cell *matHeaderCellDef>Acción</th>
         <td mat-cell *matCellDef="let l">
-          <span [ngClass]="{
-            'tag-inc': (l.movementType || '').startsWith('TRANSFER_IN') || (l.movementType || '').endsWith('INCREASE'),
-            'tag-dec': (l.movementType || '').startsWith('TRANSFER_OUT') || (l.movementType || '').endsWith('DECREASE')
-          }">
+          <span
+            class="pill"
+            [ngClass]="{
+              'success': (l.movementType || '').startsWith('TRANSFER_IN') || (l.movementType || '').endsWith('INCREASE'),
+              'danger': (l.movementType || '').startsWith('TRANSFER_OUT') || (l.movementType || '').endsWith('DECREASE'),
+              'muted': !(l.movementType)
+            }"
+          >
             {{ l.movementType || '-' }}
           </span>
         </td>
@@ -36,7 +40,9 @@
 
       <ng-container matColumnDef="quantity">
         <th mat-header-cell *matHeaderCellDef>Cantidad</th>
-        <td mat-cell *matCellDef="let l">{{ l.quantity }}</td>
+        <td mat-cell *matCellDef="let l">
+          <span class="pill muted">{{ l.quantity }}</span>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="description">

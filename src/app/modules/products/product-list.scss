@@ -113,48 +113,60 @@
 
 .table-card {
   background: var(--table-surface);
-  border: 1px solid var(--surface-border);
-  border-radius: 18px;
-  padding: 6px 0;
+  border: 1px solid var(--table-row-border);
+  border-radius: 20px;
+  padding: 12px;
   box-shadow: var(--shadow-elevated);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
 }
 
 table.mat-mdc-table {
   width: 100%;
   background: transparent;
+  border-collapse: separate !important;
+  border-spacing: 0 10px !important;
 
-  .mdc-data-table__content,
-  .mdc-data-table__row,
-  .mdc-data-table__cell,
-  .mdc-data-table__header-cell {
-    background: transparent;
-  }
+  .mat-mdc-header-row,
+  .mat-mdc-row { border: none; }
 
-  .mdc-data-table__header-row {
+  .mat-mdc-header-row { height: auto; }
+
+  .mat-mdc-header-cell {
     background: var(--table-header-bg);
-  }
-
-  .mdc-data-table__header-cell {
     color: var(--text-muted);
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid var(--table-row-border);
+    padding: 12px 16px;
+
+    &:first-child { border-radius: 14px 0 0 14px; }
+    &:last-child { border-radius: 0 14px 14px 0; }
+  }
+
+  .mat-mdc-row {
+    background: var(--table-row);
+    border: 1px solid var(--table-row-border);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+
+    &:hover {
+      background: var(--table-row-strong-hover);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.45);
+      transform: translateY(-1px);
+    }
+  }
+
+  .mat-mdc-cell {
+    padding: 14px 16px;
     font-size: 14px;
-    border-bottom: 1px solid var(--table-divider);
-  }
-
-  .mdc-data-table__row {
     color: var(--text-primary);
-    transition: background 0.2s ease;
-    border-bottom: 1px solid var(--table-divider);
-  }
+    font-weight: 650;
+    border: none;
+    background: transparent;
 
-  .mdc-data-table__cell {
-    font-size: 14px;
-    color: var(--text-primary);
-  }
-
-  .mdc-data-table__row:hover {
-    background: var(--table-row-hover);
+    &:first-child { border-radius: 14px 0 0 14px; }
+    &:last-child { border-radius: 0 14px 14px 0; }
   }
 }
 

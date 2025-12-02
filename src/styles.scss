@@ -40,6 +40,10 @@ html {
   --table-header-bg: rgba(255, 255, 255, 0.06);
   --table-surface: rgba(15, 23, 42, 0.75);
   --table-row-hover: rgba(59, 130, 246, 0.12);
+  --table-row-strong-hover: rgba(59, 130, 246, 0.16);
+  --table-row-border: rgba(255, 255, 255, 0.08);
+  --table-row: rgba(17, 24, 39, 0.92);
+  --table-chip-bg: rgba(255, 255, 255, 0.06);
   --table-divider: rgba(255, 255, 255, 0.08);
 
   --footer-bg: #0f172a;
@@ -67,6 +71,10 @@ body.theme-light {
   --table-header-bg: #e6edf8;
   --table-surface: #f3f6fb;
   --table-row-hover: #dde6f3;
+  --table-row-strong-hover: #d0d9ec;
+  --table-row-border: #c7d3e8;
+  --table-row: #e9eef8;
+  --table-chip-bg: #e1e9f7;
   --table-divider: #cbd5e1;
 
   --footer-bg: #f1f5f9;

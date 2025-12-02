@@ -34,7 +34,7 @@
       <ng-container matColumnDef="active">
         <th mat-header-cell *matHeaderCellDef>Activo</th>
         <td mat-cell *matCellDef="let u">
-          <span [class.active]="u.active" [class.inactive]="!u.active">
+          <span class="pill" [ngClass]="u.active ? 'success' : 'danger'">
             {{ u.active ? 'Sí' : 'No' }}
           </span>
         </td>
