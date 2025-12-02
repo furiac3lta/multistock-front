@@ -6,17 +6,14 @@
     </div>
     <div class="cta-group">
       <div class="action-icons">
-        <button class="surface-btn" (click)="exportarExcel()" aria-label="Exportar Excel">
+        <button class="surface-btn icon-only" (click)="exportarExcel()" aria-label="Exportar Excel">
           <mat-icon>table_view</mat-icon>
-          <span>Excel</span>
         </button>
-        <button class="surface-btn" (click)="exportarPDF()" aria-label="Exportar PDF">
+        <button class="surface-btn icon-only" (click)="exportarPDF()" aria-label="Exportar PDF">
           <mat-icon>picture_as_pdf</mat-icon>
-          <span>PDF</span>
         </button>
-        <button class="surface-btn warn" (click)="triggerExcel()" aria-label="Importar Excel">
+        <button class="surface-btn icon-only warn" (click)="triggerExcel()" aria-label="Importar Excel">
           <mat-icon>upload</mat-icon>
-          <span>Importar</span>
         </button>
       </div>
       <button class="btn-add" (click)="openCreate()">

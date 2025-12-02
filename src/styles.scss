@@ -23,12 +23,12 @@ html {
   --text-muted: #cbd5f5;
   --icon-color: #e5e7eb;
 
-  --layout-background: radial-gradient(circle at 10% 20%, rgba(250, 204, 21, 0.1), transparent 28%),
-                       radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.08), transparent 22%),
+  --layout-background: radial-gradient(circle at 10% 20%, rgba(250, 204, 21, 0.08), transparent 28%),
+                       radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.06), transparent 22%),
                        #0b1120;
-  --content-background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.85)),
-                        radial-gradient(circle at 20% 20%, rgba(250, 204, 21, 0.09), transparent 30%),
-                        radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.08), transparent 28%),
+  --content-background: linear-gradient(180deg, rgba(11, 17, 32, 0.9), rgba(11, 17, 32, 0.9)),
+                        radial-gradient(circle at 20% 20%, rgba(250, 204, 21, 0.08), transparent 30%),
+                        radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.07), transparent 28%),
                         #0b1120;
   --surface-card: rgba(255, 255, 255, 0.04);
   --surface-border: rgba(255, 255, 255, 0.08);
@@ -38,6 +38,7 @@ html {
   --surface-button-hover: rgba(255, 255, 255, 0.12);
 
   --table-header-bg: rgba(255, 255, 255, 0.06);
+  --table-surface: rgba(15, 23, 42, 0.75);
   --table-row-hover: rgba(59, 130, 246, 0.12);
   --table-divider: rgba(255, 255, 255, 0.08);
 
@@ -52,18 +53,21 @@ body.theme-light {
   --text-muted: #475569;
   --icon-color: #0f172a;
 
-  --layout-background: linear-gradient(180deg, #f8fafc, #e2e8f0);
-  --content-background: linear-gradient(180deg, #f8fafc, #e2e8f0);
-  --surface-card: #ffffff;
-  --surface-border: #e2e8f0;
-  --surface-strong: #f8fafc;
-  --surface-button: #f8fafc;
-  --surface-button-border: #d6dbe8;
-  --surface-button-hover: #e7edf7;
+  --layout-background: radial-gradient(circle at 12% 22%, rgba(59, 130, 246, 0.08), transparent 28%),
+                       radial-gradient(circle at 80% 10%, rgba(250, 204, 21, 0.12), transparent 24%),
+                       #e5eaf3;
+  --content-background: linear-gradient(180deg, #edf2f7, #dfe6f2);
+  --surface-card: #f3f6fb;
+  --surface-border: #d4dbea;
+  --surface-strong: #e5eaf3;
+  --surface-button: #ecf1f8;
+  --surface-button-border: #c9d2e4;
+  --surface-button-hover: #dde5f3;
 
-  --table-header-bg: #f1f5f9;
-  --table-row-hover: #e2e8f0;
-  --table-divider: #e2e8f0;
+  --table-header-bg: #e6edf8;
+  --table-surface: #f3f6fb;
+  --table-row-hover: #dde6f3;
+  --table-divider: #cbd5e1;
 
   --footer-bg: #f1f5f9;
   --footer-text: #111827;
