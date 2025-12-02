@@ -1,7 +1,8 @@
 .title {
   font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-strong);
 }
 
 .form {
@@ -15,19 +16,25 @@
   flex-direction: column;
 
   label {
-    font-weight: 600;
-    margin-bottom: 4px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-muted);
   }
 
   input, select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    font-size: 15px;
+    background: var(--surface-strong);
+    color: var(--text-strong);
+    font-weight: 600;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
     &:focus {
       outline: none;
-      border-color: #1976d2;
+      border-color: var(--brand-gradient-start);
+      box-shadow: 0 0 0 3px var(--brand-glow);
     }
   }
 }
@@ -35,32 +42,36 @@
 .actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
-  gap: 10px;
+  margin-top: 12px;
+  gap: 12px;
+
+  .cancel,
+  .save {
+    border-radius: 12px;
+    border: 1px solid transparent;
+    font-weight: 700;
+    padding: 10px 16px;
+  }
 
   .cancel {
-    padding: 8px 14px;
-    background: #888;
-    color: white;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
+    background: transparent;
+    border-color: var(--surface-border);
+    color: var(--text-strong);
 
     &:hover {
-      background: #666;
+      background: var(--surface-button-hover);
+      border-color: var(--brand-gradient-end);
     }
   }
 
   .save {
-    padding: 8px 14px;
-    background: #1976d2;
-    color: white;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
+    background: linear-gradient(135deg, var(--brand-gradient-start), var(--brand-gradient-end));
+    color: #0b0f1b;
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.25);
 
     &:hover {
-      background: #115293;
+      box-shadow: 0 12px 28px rgba(249, 115, 22, 0.35);
+      transform: translateY(-1px);
     }
   }
 }

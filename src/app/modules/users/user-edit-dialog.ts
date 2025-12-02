@@ -1,5 +1,5 @@
 import { Component, Inject, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BranchService } from '../../core/services/branch.service';
@@ -11,7 +11,7 @@ import { User } from './user.model';
 @Component({
   selector: 'app-user-edit-dialog',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
   templateUrl: './user-edit-dialog.html',
   styleUrls: ['./user-edit-dialog.scss']
 })
