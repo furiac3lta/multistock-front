@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
@@ -6,7 +6,7 @@ import { UserService } from '../../core/services/user.service';
 import { User } from './user.model';
 import { UserPasswordDialog } from './user-password-dialog';
 import { UserCreateDialog } from './user-create-dialog';
-import { UserEditDialog } from './user-edit-dialog';   // ← AGREGAR ESTO
+import { UserEditDialog } from './user-edit-dialog';
 import { UserRoleDialog } from './user-role-dialog';
 
 @Component({
@@ -16,7 +16,7 @@ import { UserRoleDialog } from './user-role-dialog';
   templateUrl: './user-list.html',
   styleUrls: ['./user-list.scss']
 })
-export class UserList {
+export class UserList implements OnInit {
 
   private dialog = inject(MatDialog);
   private userService = inject(UserService);
@@ -72,24 +72,26 @@ export class UserList {
       error: err => console.error(err)
     });
   }
-openEdit(user: User) {
-  const ref = this.dialog.open(UserEditDialog, {
-    width: '500px',
-    data: user
-  });
 
-  ref.afterClosed().subscribe(ok => {
-    if (ok) this.loadUsers();
-  });
-}
-openRole(user: User) {
-  const ref = this.dialog.open(UserRoleDialog, {
-    width: '400px',
-    data: user
-  });
-ref.afterClosed().subscribe(ok => {
-    if (ok) this.loadUsers();
-  });
+  openEdit(user: User) {
+    const ref = this.dialog.open(UserEditDialog, {
+      width: '500px',
+      data: user
+    });
 
-}
+    ref.afterClosed().subscribe(ok => {
+      if (ok) this.loadUsers();
+    });
+  }
+
+  openRole(user: User) {
+    const ref = this.dialog.open(UserRoleDialog, {
+      width: '400px',
+      data: user
+    });
+
+    ref.afterClosed().subscribe(ok => {
+      if (ok) this.loadUsers();
+    });
+  }
 }
