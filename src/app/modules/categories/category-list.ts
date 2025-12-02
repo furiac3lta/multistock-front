@@ -13,6 +13,7 @@ import { BranchSessionService } from '../../core/services/branch-session.service
   standalone: true,
   imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule],
   templateUrl: './category-list.html',
+  styleUrls: ['./category-list.scss']
 })
 export class CategoryList implements OnInit {
 
