@@ -18,6 +18,7 @@ export class Navbar implements OnInit, OnDestroy {
 
   usuario = { nombre: 'Marce Dev' };
   theme: 'light' | 'dark' = 'dark';
+  menuOpen = false;
 
   private themeService = inject(ThemeService);
   private subscription?: Subscription;
@@ -32,6 +33,10 @@ export class Navbar implements OnInit, OnDestroy {
 
   toggleTheme() {
     this.themeService.toggle();
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
   }
 
   logout() {

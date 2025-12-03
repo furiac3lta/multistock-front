@@ -1,17 +1,29 @@
 <nav class="navbar">
-  <div class="navbar-title">STOCK APP</div>
+  <div class="brand">
+    <span class="brand-dot"></span>
+    <div class="brand-copy">
+      <div class="brand-title">Stock App</div>
+      <div class="brand-subtitle">Gestión inteligente</div>
+    </div>
+  </div>
 
-  <app-branch-switcher></app-branch-switcher>
+  <button class="menu-btn" type="button" (click)="toggleMenu()" [attr.aria-label]="menuOpen ? 'Cerrar menú' : 'Abrir menú'">
+    <mat-icon>{{ menuOpen ? 'close' : 'menu' }}</mat-icon>
+  </button>
 
-  <div class="nav-actions">
-    <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="theme === 'dark' ? 'Activar tema claro' : 'Activar tema oscuro'">
-      <mat-icon>{{ theme === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
-    </button>
+  <div class="nav-right" [class.is-open]="menuOpen">
+    <app-branch-switcher class="branch-switcher"></app-branch-switcher>
 
-    <span class="user-name">{{ usuario.nombre }}</span>
+    <div class="nav-actions">
+      <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="theme === 'dark' ? 'Activar tema claro' : 'Activar tema oscuro'">
+        <mat-icon>{{ theme === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
 
-    <button class="logout-btn" (click)="logout()" aria-label="Cerrar sesión">
-      <mat-icon>logout</mat-icon>
-    </button>
+      <span class="user-name">{{ usuario.nombre }}</span>
+
+      <button class="logout-btn" (click)="logout()" aria-label="Cerrar sesión">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
   </div>
 </nav>

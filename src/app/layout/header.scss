@@ -36,9 +36,9 @@ select {
 }
 
 .right .config-btn {
-  background: linear-gradient(135deg, var(--color-violet), var(--color-amber));
-  border: none;
-  color: #0f2545;
+  background: var(--bg-muted);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
   font-size: 22px;
   cursor: pointer;
   width: 40px;

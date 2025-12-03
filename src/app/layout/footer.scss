@@ -1,7 +1,8 @@
-.footer {
+.footer,
+.footer-fixed {
   height: 56px;
-  background: linear-gradient(120deg, var(--color-sunset), var(--color-amber));
-  color: #0f2545;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,4 +13,14 @@
   font-weight: 700;
   letter-spacing: 0.3px;
   box-shadow: var(--shadow-soft);
+  border-top: 1px solid var(--border-subtle);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 12;
+}
+
+.footer-inner {
+  margin: 0 auto;
 }

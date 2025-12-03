@@ -32,10 +32,7 @@
 }
 
 .switcher-item.active {
-  color: #0f2545;
+  color: var(--text-primary);
   border-bottom: 2px solid var(--color-amber);
   font-weight: 700;
-  background: linear-gradient(120deg, var(--color-amber), var(--color-sunset));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
