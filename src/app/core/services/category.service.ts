@@ -2,12 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../models/category.model';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
 
   private http = inject(HttpClient);
-  private api = 'http://localhost:8080/categories';
+  private api = `${environment.apiBaseUrl}/categories`;
 
   getAll(): Observable<Category[]> {
     return this.http.get<Category[]>(this.api);
@@ -25,7 +26,7 @@ export class CategoryService {
     return this.http.delete<void>(`${this.api}/${id}`);
   }
   getStockSummary(branchId: number) {
-  return this.http.get<any[]>(`http://localhost:8080/dashboard/stock-category/${branchId}`);
-}
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/dashboard/stock-category/${branchId}`);
+  }
 
 }

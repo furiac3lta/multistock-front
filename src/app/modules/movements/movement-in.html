@@ -1,26 +1,36 @@
-<h2>Registrar Entrada de Stock</h2>
+<div class="page-shell">
+  <section class="page-header">
+    <div class="page-title-wrap">
+      <span class="page-kicker">Operaciones</span>
+      <h1 class="page-title">Registrar entrada de stock</h1>
+      <p class="page-subtitle">Cargá ingresos al inventario con contexto y trazabilidad.</p>
+    </div>
+  </section>
 
-<div class="form">
+  <section class="page-card">
+    <div class="stack-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Producto</mat-label>
+        <mat-select [(ngModel)]="productId">
+          <mat-option *ngFor="let p of products" [value]="p.id">
+            {{ p.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Producto</mat-label>
-    <mat-select [(ngModel)]="productId">
-      <mat-option *ngFor="let p of products" [value]="p.id">
-        {{ p.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Cantidad</mat-label>
+        <input type="number" matInput [(ngModel)]="quantity" min="1">
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Cantidad</mat-label>
-    <input type="number" matInput [(ngModel)]="quantity" min="1">
-  </mat-form-field>
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput [(ngModel)]="description"></textarea>
+      </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full">
-    <mat-label>Descripción</mat-label>
-    <textarea matInput [(ngModel)]="description"></textarea>
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="save()">Registrar</button>
-
+      <div class="action-row">
+        <button mat-raised-button color="primary" (click)="save()">Registrar entrada</button>
+      </div>
+    </div>
+  </section>
 </div>

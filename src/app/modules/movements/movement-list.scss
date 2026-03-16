@@ -1,24 +1,3 @@
 .full {
   width: 100%;
 }
-
-.in { color: var(--status-success); font-weight: bold; }
-.out { color: var(--color-coral); font-weight: bold; }
-
-mat-card {
-  padding: 20px;
-  margin: 20px auto;
-  background: var(--bg-surface) !important;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-}

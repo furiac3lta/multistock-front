@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 import { BranchSessionService } from './branch-session.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
@@ -10,7 +11,7 @@ export class ProductService {
   private http = inject(HttpClient);
   private branchSession = inject(BranchSessionService);
 
-  private api = 'http://localhost:8080/products';
+  private api = `${environment.apiBaseUrl}/products`;
 
   // 🔥 LISTAR productos por sucursal
   getAll(): Observable<Product[]> {

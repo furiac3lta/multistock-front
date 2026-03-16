@@ -1,104 +1,118 @@
-
-
-
-<div class="dashboard-container">
-
-  <h1 class="title">Dashboard</h1>
-
-  <div class="card-grid">
-
-    <div class="stat-card">
-      <h3>Total de Productos</h3>
-      <p class="value">{{ totalProductos }}</p>
+<div class="page-shell dashboard-container">
+  <section class="page-header">
+    <div class="page-title-wrap">
+      <span class="page-kicker">Resumen operativo</span>
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-subtitle">Una vista clara del inventario, la actividad reciente y los puntos que requieren atención.</p>
     </div>
+  </section>
 
-    <div class="stat-card">
-      <h3>Total de Categorías</h3>
-      <p class="value">{{ totalCategorias }}</p>
+  <section class="metric-grid">
+    <article class="metric-card">
+      <span class="metric-label">Total de productos</span>
+      <div class="metric-value">{{ totalProductos }}</div>
+      <div class="metric-note">Catálogo disponible en el sistema</div>
+    </article>
+
+    <article class="metric-card">
+      <span class="metric-label">Categorías activas</span>
+      <div class="metric-value">{{ totalCategorias }}</div>
+      <div class="metric-note">Estructura de clasificación vigente</div>
+    </article>
+
+    <article class="metric-card">
+      <span class="metric-label">Valor inventario</span>
+      <div class="metric-value">{{ valorInventario | currency:'ARS':'symbol':'1.0-0' }}</div>
+      <div class="metric-note">Valorización consolidada del stock</div>
+    </article>
+
+    <article class="metric-card">
+      <span class="metric-label">Stock total</span>
+      <div class="metric-value">{{ totalStock }}</div>
+      <div class="metric-note">Unidades contabilizadas</div>
+    </article>
+
+    <article class="metric-card">
+      <span class="metric-label">Movimientos hoy</span>
+      <div class="metric-value">{{ totalMovimientosHoy }}</div>
+      <div class="metric-note">Operaciones registradas en la jornada</div>
+    </article>
+  </section>
+
+  <section class="split-grid">
+    <article class="section-card">
+      <h2 class="section-card-title">Stock bajo</h2>
+      <p class="section-card-copy">Productos con nivel de existencias igual o menor a 5 unidades.</p>
+
+      <div *ngIf="stockBajo.length === 0" class="empty-state">No hay productos con stock bajo.</div>
+
+      <ul *ngIf="stockBajo.length > 0" class="list-clean">
+        <li *ngFor="let p of stockBajo">
+          <div>
+            <div class="list-primary">{{ p.name }}</div>
+            <div class="list-secondary">Controlá reposición y rotación</div>
+          </div>
+          <span class="status-badge danger">Stock {{ p.stock }}</span>
+        </li>
+      </ul>
+    </article>
+
+    <article class="section-card">
+      <h2 class="section-card-title">Últimos productos</h2>
+      <p class="section-card-copy">Altas recientes incorporadas al catálogo.</p>
+
+      <ul class="list-clean">
+        <li *ngFor="let p of ultimosProductos">
+          <div>
+            <div class="list-primary">{{ p.name }}</div>
+            <div class="list-secondary">SKU {{ p.sku || 'Sin asignar' }}</div>
+          </div>
+          <span class="data-chip neutral">{{ p.salePrice | currency:'ARS':'symbol':'1.0-0' }}</span>
+        </li>
+      </ul>
+    </article>
+
+    <article class="section-card section-card-wide">
+      <h2 class="section-card-title">Últimos movimientos</h2>
+      <p class="section-card-copy">Actividad más reciente registrada en inventario.</p>
+
+      <ul class="list-clean">
+        <li *ngFor="let m of ultimosMovimientos">
+          <div>
+            <div class="list-primary">{{ m.productName }}</div>
+            <div class="list-secondary">{{ m.createdAt | date:'dd/MM HH:mm' }} · Cantidad {{ m.quantity }}</div>
+          </div>
+          <span
+            class="status-badge"
+            [class.success]="m.movementType === 'INCREASE'"
+            [class.danger]="m.movementType === 'DECREASE'"
+          >
+            {{ m.movementType === 'INCREASE' ? 'Ingreso' : 'Salida' }}
+          </span>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="section-card">
+    <h2 class="section-card-title">Analítica visual</h2>
+    <p class="section-card-copy">Gráficos de control para seguimiento comercial y operativo.</p>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Stock por categoría</h3>
+        <canvas id="chartCategory"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>Productos por sucursal</h3>
+        <canvas id="chartBranch"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>Movimientos últimos 30 días</h3>
+        <canvas id="chartMovements"></canvas>
+      </div>
     </div>
-
-    <div class="stat-card">
-      <h3>Valor del Inventario</h3>
-      <p class="value">{{ valorInventario | currency:'ARS':'symbol':'1.0-0' }}</p>
-    </div>
-
-    <div class="stat-card">
-      <h3>Stock Total</h3>
-      <p class="value">{{ totalStock }}</p>
-    </div>
-
-    <div class="stat-card">
-      <h3>Movimientos Hoy</h3>
-      <p class="value">{{ totalMovimientosHoy }}</p>
-    </div>
-
-  </div>
-
-  <!-- STOCK BAJO -->
-  <div class="section">
-    <h2>Stock Bajo (≤ 5)</h2>
-
-    <div *ngIf="stockBajo.length === 0" class="empty">No hay productos con stock bajo</div>
-
-    <ul *ngIf="stockBajo.length > 0">
-      <li *ngFor="let p of stockBajo">
-        {{ p.name }} — Stock: <strong>{{ p.stock }}</strong>
-      </li>
-    </ul>
-  </div>
-
-  <!-- ÚLTIMOS PRODUCTOS -->
-  <div class="section">
-    <h2>Últimos Productos</h2>
-
-    <ul>
-      <li *ngFor="let p of ultimosProductos">
-        {{ p.name }} —
-        <span>{{ p.salePrice | currency:'ARS':'symbol':'1.0-0' }}</span>
-      </li>
-    </ul>
-  </div>
-
-  <!-- ÚLTIMOS MOVIMIENTOS -->
-  <div class="section">
-    <h2>Últimos Movimientos</h2>
-
-    <ul>
-      <li *ngFor="let m of ultimosMovimientos">
-        <strong>{{ m.createdAt | date:'dd/MM HH:mm' }}</strong> —
-        {{ m.productName }}
-        <span
-          [class.in]="m.movementType === 'INCREASE'"
-          [class.out]="m.movementType === 'DECREASE'"
-        >
-          ({{ m.movementType === 'INCREASE' ? 'Ingreso' : 'Salida' }})
-        </span>
-        — Cant: {{ m.quantity }}
-      </li>
-    </ul>
-  </div>
-<!-- GRÁFICOS -->
-<div class="section">
-  <h2>Gráficos</h2>
-
-  <div class="charts-grid">
-
-    <div class="chart-card">
-      <h3>Stock por Categoría</h3>
-      <canvas id="chartCategory"></canvas>
-    </div>
-
-    <div class="chart-card">
-      <h3>Productos por Sucursal</h3>
-      <canvas id="chartBranch"></canvas>
-    </div>
-
-    <div class="chart-card">
-      <h3>Movimientos últimos 30 días</h3>
-      <canvas id="chartMovements"></canvas>
-    </div>
-
-  </div>
-</div>
-
+  </section>
 </div>

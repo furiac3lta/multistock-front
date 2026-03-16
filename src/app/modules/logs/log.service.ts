@@ -2,12 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LogMovement } from './log.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class LogService {
 
   private http = inject(HttpClient);
-  private api = 'http://localhost:8080/logs';
+  private api = `${environment.apiBaseUrl}/logs`;
 
   findAll(): Observable<LogMovement[]> {
     return this.http.get<LogMovement[]>(this.api);

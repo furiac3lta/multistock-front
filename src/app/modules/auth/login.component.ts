@@ -25,43 +25,118 @@ interface AuthRequest {
     MatButtonModule
   ],
   template: `
-    <div class="login-wrapper">
-      <mat-card>
-        <h2>Login</h2>
+    <div class="login-shell">
+      <div class="login-panel">
+        <div class="login-copy">
+          <span class="login-kicker">MultiStock</span>
+          <h1>Acceso al sistema</h1>
+          <p>Gestioná inventario, movimientos y usuarios desde una interfaz clara, estable y profesional.</p>
+        </div>
 
-        <form [formGroup]="form">
-          <mat-form-field appearance="outline">
-            <mat-label>Usuario</mat-label>
-            <input matInput formControlName="username">
-          </mat-form-field>
+        <mat-card class="login-card">
+          <div class="login-card-header">
+            <h2>Iniciar sesión</h2>
+            <p>Ingresá tus credenciales para continuar.</p>
+          </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Contraseña</mat-label>
-            <input matInput type="password" formControlName="password">
-          </mat-form-field>
+          <form [formGroup]="form" class="login-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Usuario</mat-label>
+              <input matInput formControlName="username">
+            </mat-form-field>
 
-          <button mat-raised-button color="primary" (click)="submit()">
-            Ingresar
-          </button>
-        </form>
-      </mat-card>
+            <mat-form-field appearance="outline">
+              <mat-label>Contraseña</mat-label>
+              <input matInput type="password" formControlName="password">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="submit()">
+              Ingresar
+            </button>
+          </form>
+        </mat-card>
+      </div>
     </div>
   `,
   styles: [`
-    .login-wrapper {
-      height: 100vh;
+    .login-shell {
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 20px;
+      justify-content: center;
+      padding: 24px 16px;
+      background: var(--bg-body);
     }
-    mat-card {
-      width: 350px;
-      padding: 20px;
+
+    .login-panel {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: stretch;
     }
-    button {
-      margin-top: 15px;
+
+    .login-copy,
+    .login-card {
+      padding: 28px;
+      border-radius: 20px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+    }
+
+    .login-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .login-kicker {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .login-copy h1 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.05;
+    }
+
+    .login-copy p,
+    .login-card-header p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .login-card {
       width: 100%;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .login-card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .login-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    button {
+      width: 100%;
+    }
+
+    @media (max-width: 767px) {
+      .login-copy,
+      .login-card {
+        padding: 22px;
+      }
     }
   `]
 })

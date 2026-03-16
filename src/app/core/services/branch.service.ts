@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface Branch {
   id: number;
@@ -13,7 +14,7 @@ export interface Branch {
 @Injectable({ providedIn: 'root' })
 export class BranchService {
 
-  private api = 'http://localhost:8080/branches';
+  private api = `${environment.apiBaseUrl}/branches`;
   private _currentBranchId = 1; // valor por defecto
 
   constructor(private http: HttpClient) {}
@@ -30,7 +31,7 @@ export class BranchService {
     return this._currentBranchId;
   }
   getSummary() {
-  return this.http.get<any[]>(`http://localhost:8080/dashboard/stock-branch`);
-}
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/dashboard/stock-branch`);
+  }
 
 }

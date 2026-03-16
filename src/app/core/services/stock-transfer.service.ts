@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface StockTransferRequest {
   sourceBranchId: number;
@@ -15,7 +16,7 @@ export interface StockTransferRequest {
 export class StockTransferService {
 
   private http = inject(HttpClient);
-  private api = 'http://localhost:8080/stock/transfer';
+  private api = `${environment.apiBaseUrl}/stock/transfer`;
 
   transfer(req: StockTransferRequest): Observable<any> {
     return this.http.post(this.api, req);

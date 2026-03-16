@@ -1,51 +1,6 @@
 .log-container {
-  padding: 24px;
-  background: var(--bg-body);
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  gap: 12px;
-
-  input {
-    padding: 10px 14px;
-    border-radius: 12px;
-    border: 1px solid var(--border-subtle);
-    width: 260px;
-    background: var(--bg-muted);
-    color: var(--text-primary);
-  }
-}
-
-table {
-  width: 100%;
-}
-
-table th {
-  padding: 12px;
-  background: color-mix(in srgb, var(--color-abyss) 8%, transparent);
-  text-align: left;
-  font-weight: 700;
-}
-
-table td {
-  padding: 12px;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.action {
-  font-weight: 800;
-  color: var(--color-violet);
-}
-
-.tag-inc {
-  color: var(--status-success);
-  font-weight: 700;
-}
-
-.tag-dec {
-  color: var(--color-coral);
-  font-weight: 700;
+.search-box {
+  min-width: min(320px, 100%);
 }

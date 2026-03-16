@@ -1,47 +1,59 @@
-<div class="header">
-  <h2>Categorías</h2>
+<div class="page-shell">
+  <section class="page-header">
+    <div class="page-title-wrap">
+      <span class="page-kicker">Configuración</span>
+      <h1 class="page-title">Categorías</h1>
+      <p class="page-subtitle">Ordená el catálogo con una estructura de categorías clara y consistente.</p>
+    </div>
 
-  <button class="btn-add" (click)="openCreate()">
-    <mat-icon>add</mat-icon>
-    Nueva Categoría
-  </button>
+    <div class="page-actions">
+      <button class="btn-add" (click)="openCreate()">
+        <mat-icon>add</mat-icon>
+        Nueva categoría
+      </button>
+    </div>
+  </section>
+
+  <section class="table-shell">
+    <div class="table-scroll">
+      <table mat-table [dataSource]="data">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let row">
+            <span class="status-badge" [class.success]="row.active" [class.neutral]="!row.active">
+              {{ row.active ? 'Activa' : 'Inactiva' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <div class="table-actions">
+              <button mat-icon-button color="accent" (click)="openEdit(row)" aria-label="Editar categoría">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button mat-icon-button color="warn" (click)="delete(row.id!)" aria-label="Eliminar categoría">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </section>
 </div>
-
-
-<table mat-table [dataSource]="data" class="mat-elevation-z2">
-
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let row"> {{ row.name }} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> Descripción </th>
-    <td mat-cell *matCellDef="let row"> {{ row.description }} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="active">
-    <th mat-header-cell *matHeaderCellDef> Activa </th>
-    <td mat-cell *matCellDef="let row">
-      {{ row.active ? 'Sí' : 'No' }}
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Acciones </th>
-    <td mat-cell *matCellDef="let row">
-
-      <button mat-icon-button color="accent" (click)="openEdit(row)">
-        <mat-icon>edit</mat-icon>
-      </button>
-
-      <button mat-icon-button color="warn" (click)="delete(row.id!)">
-        <mat-icon>delete</mat-icon>
-      </button>
-
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>

@@ -1,50 +1,54 @@
-<div class="users-container">
-
-    <div class="header">
-        <h2>Usuarios</h2>
-        <button class="create-btn" (click)="openCreate()">+ Crear usuario</button>
+<div class="page-shell users-container">
+  <section class="page-header">
+    <div class="page-title-wrap">
+      <span class="page-kicker">Administración</span>
+      <h1 class="page-title">Usuarios</h1>
+      <p class="page-subtitle">Gestioná accesos, roles y sucursales asignadas con una vista simple y controlada.</p>
     </div>
 
-    <table>
+    <div class="page-actions">
+      <button class="btn-add" (click)="openCreate()">Crear usuario</button>
+    </div>
+  </section>
+
+  <section class="table-shell">
+    <div class="table-scroll">
+      <table>
         <thead>
-            <tr>
-                <th>Usuario</th>
-                <th>Nombre</th>
-                <th>Rol</th>
-                <th>Sucursal</th>
-                <th>Activo</th>
-                <th>Acciones</th>
-            </tr>
+          <tr>
+            <th>Usuario</th>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Sucursal</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let u of users">
-                <td>{{ u.username }}</td>
-                <td>{{ u.fullName }}</td>
-                <td>{{ u.roles[0] }}</td>
-                <td>{{ u.branchName }}</td>
-
-                <td>
-                    <span [class.active]="u.active" [class.inactive]="!u.active">
-                        {{ u.active ? "Sí" : "No" }}
-                    </span>
-                </td>
-
-                <td class="actions">
-                    <button class="action-btn" (click)="openEdit(u)">Editar</button>
-
-                    <button class="action-btn" (click)="openPassword(u)">Cambiar contraseña</button>
-
-                    <button class="action-btn" (click)="openRole(u)">Rol</button>
-
-                    <button class="action-btn deactivate-btn" (click)="toggle(u)">
-                        {{ u.active ? "Desactivar" : "Activar" }}
-                    </button>
-                </td>
-
-
-            </tr>
+          <tr *ngFor="let u of users">
+            <td>{{ u.username }}</td>
+            <td>{{ u.fullName }}</td>
+            <td>{{ u.roles[0] }}</td>
+            <td>{{ u.branchName }}</td>
+            <td>
+              <span class="status-badge" [class.success]="u.active" [class.neutral]="!u.active">
+                {{ u.active ? "Activo" : "Inactivo" }}
+              </span>
+            </td>
+            <td>
+              <div class="table-actions">
+                <button class="action-btn" (click)="openEdit(u)">Editar</button>
+                <button class="action-btn" (click)="openPassword(u)">Contraseña</button>
+                <button class="action-btn" (click)="openRole(u)">Rol</button>
+                <button class="action-btn deactivate-btn" (click)="toggle(u)">
+                  {{ u.active ? "Desactivar" : "Activar" }}
+                </button>
+              </div>
+            </td>
+          </tr>
         </tbody>
-    </table>
-
+      </table>
+    </div>
+  </section>
 </div>

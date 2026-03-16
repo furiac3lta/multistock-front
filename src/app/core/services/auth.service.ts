@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 interface AuthRequest {
   username: string;
@@ -17,7 +18,7 @@ interface AuthResponse {
 export class AuthService {
 
   private http = inject(HttpClient);
-  private api = 'http://localhost:8080/auth/login';
+  private api = `${environment.apiBaseUrl}/auth/login`;
 
   login(credentials: AuthRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(this.api, credentials);

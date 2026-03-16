@@ -2,12 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Movement } from '../models/movement.model';
 import { MovementType } from '../models/movement-type.enum';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class StockService {
 
   private http = inject(HttpClient);
-  private api = 'http://localhost:8080/stock';
+  private api = `${environment.apiBaseUrl}/stock`;
 
   moveStock(
     productId: number,

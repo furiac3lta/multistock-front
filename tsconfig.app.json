@@ -10,7 +10,7 @@
   },
   "include": [
     "src/**/*.ts"
-, "src/app/modules/movements/movement-in.ts"  ],
+  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

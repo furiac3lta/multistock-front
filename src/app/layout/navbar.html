@@ -1,14 +1,22 @@
 <nav class="navbar">
-  <div class="navbar-title">STOCK APP</div>
+  <div class="navbar-brand">
+    <div class="navbar-eyebrow">Inventario</div>
+    <div class="navbar-title">MultiStock</div>
+  </div>
 
-  <app-branch-switcher></app-branch-switcher>
+  <div class="navbar-center">
+    <app-branch-switcher></app-branch-switcher>
+  </div>
 
   <div class="nav-actions">
     <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="theme === 'dark' ? 'Activar tema claro' : 'Activar tema oscuro'">
       <mat-icon>{{ theme === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>
 
-    <span class="user-name">{{ usuario.nombre }}</span>
+    <div class="user-box">
+      <span class="user-label">Sesión activa</span>
+      <span class="user-name">{{ usuario.nombre }}</span>
+    </div>
 
     <button class="logout-btn" (click)="logout()" aria-label="Cerrar sesión">
       <mat-icon>logout</mat-icon>

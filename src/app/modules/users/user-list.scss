@@ -1,89 +1,27 @@
 .users-container {
-  padding: 24px;
-  background: var(--bg-body);
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  gap: 12px;
-
-  h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-primary);
-  }
-
-  .create-btn {
-    background: linear-gradient(135deg, var(--color-violet), var(--color-amber));
-    color: #0f2545;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 16px;
-    cursor: pointer;
-    font-weight: 700;
-    box-shadow: var(--shadow-soft);
-
-    &:hover {
-      box-shadow: var(--shadow-strong);
-      transform: translateY(-2px);
-    }
-  }
-}
-
-table {
-  width: 100%;
-}
-
-table th {
-  background: color-mix(in srgb, var(--color-abyss) 10%, transparent);
-  text-align: left;
-  padding: 12px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-table td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
 }
 
 .action-btn {
-  padding: 8px 12px;
+  min-height: 36px;
+  padding: 0 12px;
   border-radius: 10px;
-  border: none;
-  background: var(--color-abyss);
-  color: #fff;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface-secondary);
+  color: var(--text-secondary);
   cursor: pointer;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
 
   &:hover {
-    background: var(--color-violet);
+    background: var(--bg-subtle);
+    color: var(--text-primary);
   }
 }
 
 .deactivate-btn {
-  background: var(--color-coral);
+  color: var(--danger);
 
   &:hover {
-    background: var(--color-sunset);
+    background: color-mix(in srgb, var(--danger) 10%, var(--bg-surface-secondary));
   }
-}
-
-.active {
-  color: var(--status-success);
-  font-weight: 700;
-}
-
-.inactive {
-  color: var(--color-coral);
-  font-weight: 700;
 }

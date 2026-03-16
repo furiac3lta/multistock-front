@@ -1,13 +1,10 @@
 <h2 mat-dialog-title>Ajustar Stock</h2>
 
 <div mat-dialog-content>
-
   <form [formGroup]="form" class="form-wrapper">
+    <p class="dialog-meta"><strong>Producto:</strong> {{ data.name }}</p>
+    <p class="dialog-meta"><strong>Stock actual:</strong> {{ data.stock }}</p>
 
-    <p><strong>Producto:</strong> {{ data.name }}</p>
-    <p><strong>Stock actual:</strong> {{ data.stock }}</p>
-
-    <!-- Tipo de ajuste -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Tipo de ajuste</mat-label>
       <mat-select formControlName="mode">
@@ -17,7 +14,6 @@
       </mat-select>
     </mat-form-field>
 
-    <!-- Entrada / Salida -->
     <div *ngIf="form.value.mode !== 'DIRECT'">
       <mat-form-field appearance="outline" class="full">
         <mat-label>Cantidad</mat-label>
@@ -25,7 +21,6 @@
       </mat-form-field>
     </div>
 
-    <!-- Ajuste DIRECTO -->
     <div *ngIf="form.value.mode === 'DIRECT'">
       <mat-form-field appearance="outline" class="full">
         <mat-label>Nuevo valor de stock</mat-label>
@@ -33,14 +28,11 @@
       </mat-form-field>
     </div>
 
-    <!-- Descripción -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Descripción</mat-label>
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
-
   </form>
-
 </div>
 
 <div mat-dialog-actions align="end">

@@ -1,25 +1,13 @@
 <div class="layout">
-
-  <!-- NAVBAR FIJO (FUERA DEL SCROLL) -->
   <app-navbar class="navbar-fixed"></app-navbar>
+  <app-tabs class="tabs-fixed"></app-tabs>
 
-  <!-- HEADER + SWITCHER (PUEDEN IR JUNTOS) -->
-  <div class="top-controls">
-   
-  
-  </div>
+  <main class="content-scroll">
+    <div class="content-container">
+      <app-global-loader></app-global-loader>
+      <router-outlet></router-outlet>
+    </div>
+  </main>
 
-  <!-- TABS DE NAVEGACIÓN (DEBEN ESTAR DENTRO DEL LAYOUT) -->
-  <app-tabs></app-tabs>
-
-  <!-- CONTENIDO PRINCIPAL (ROUTER) -->
-  <div class="content-scroll">
-    <app-global-loader></app-global-loader>
-
-    <router-outlet></router-outlet>
-  </div>
-
-  <!-- FOOTER FIJO -->
   <app-footer class="footer-fixed"></app-footer>
-
 </div>

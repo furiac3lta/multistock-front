@@ -1,7 +1,8 @@
 <h2 mat-dialog-title>{{ data ? 'Editar Categoría' : 'Nueva Categoría' }}</h2>
 
 <div mat-dialog-content>
-  <form [formGroup]="form">
+  <form [formGroup]="form" class="dialog-form">
+    <p class="dialog-copy">Definí una categoría clara para organizar el catálogo y mantener consistencia operacional.</p>
 
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Nombre</mat-label>
@@ -16,7 +17,6 @@
     <mat-slide-toggle formControlName="active">
       Activa
     </mat-slide-toggle>
-
   </form>
 </div>
 

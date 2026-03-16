@@ -1,15 +1,18 @@
 .footer {
-  height: 56px;
-  background: linear-gradient(120deg, var(--color-sunset), var(--color-amber));
-  color: #0f2545;
+  min-height: 56px;
+  background: transparent;
+  color: var(--text-muted);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
+  font-size: 13px;
   text-align: center;
   width: 100%;
-  padding: 0 14px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  box-shadow: var(--shadow-soft);
+  padding: 0 16px 24px;
+}
+
+.footer-inner {
+  width: min(1280px, 100%);
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
 }

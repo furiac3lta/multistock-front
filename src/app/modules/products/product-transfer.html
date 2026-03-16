@@ -1,13 +1,10 @@
 <h2 mat-dialog-title>Transferir Stock</h2>
 
 <div mat-dialog-content>
-
-  <p><strong>Producto:</strong> {{ data.name }}</p>
-  <p><strong>Stock disponible:</strong> {{ data.stock }}</p>
+  <p class="dialog-meta"><strong>Producto:</strong> {{ data.name }}</p>
+  <p class="dialog-meta"><strong>Stock disponible:</strong> {{ data.stock }}</p>
 
   <form [formGroup]="form" class="form-wrapper">
-
-    <!-- Sucursal destino -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Sucursal destino</mat-label>
       <mat-select formControlName="targetBranchId">
@@ -17,20 +14,16 @@
       </mat-select>
     </mat-form-field>
 
-    <!-- Cantidad -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Cantidad a transferir</mat-label>
       <input matInput type="number" min="1" formControlName="quantity">
     </mat-form-field>
 
-    <!-- Descripción -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Descripción</mat-label>
       <textarea matInput rows="3" formControlName="description"></textarea>
     </mat-form-field>
-
   </form>
-
 </div>
 
 <div mat-dialog-actions align="end">
